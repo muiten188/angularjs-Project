@@ -1,0 +1,483 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>{{ (ctrl.serviceRegistration.serviceRequestId ? 'LABEL.SERVICE_REGISTRATION.UPDATE' : 'LABEL.SERVICE_REGISTRATION.CREATE')
+        | translate }}
+        <small>{{(ctrl.serviceRegistration.serviceRequestId ? 'LABEL.SERVICE_REGISTRATION.UPDATE' : 'LABEL.SERVICE_REGISTRATION.CREATE')
+            | translate }}</small>
+    </h1>
+</section>
+<!-- Main content -->
+<section class="content">
+    <div class="box">
+        <div class="box-header with-border">
+            <div class="col-xs-12 text-right">
+                <!-- <button type="submit" class="btn btn-primary ng-binding" ng-click="ctrl.onSubmit()">
+                            <i class="fa fa-save"></i> {{'BUTTON.SAVE'|translate}}</button> -->
+                <button type="submit" class="btn btn-primary ng-binding" ng-disabled="(ctrl.serviceRegistration.serviceRequestId?false:!formApp.$dirty) || !formApp.$valid"
+                    ng-click="ctrl.onSubmit()">
+                    <i class="fa fa-save"></i> {{'BUTTON.SAVE'|translate}}</button>
+                <button type="submit" class="btn btn-primary ng-binding" ng-disabled="ctrl.isApproveOrReject" ng-show="ctrl.serviceRegistration.serviceRequestId"
+                    ng-click="ctrl.onApprove()">
+                    <i class="fa fa-save"></i> {{'BUTTON.APPROVE'|translate}}</button>
+                <button type="submit" class="btn btn-primary ng-binding" ng-disabled="ctrl.isApproveOrReject" ng-show="ctrl.serviceRegistration.serviceRequestId"
+                    ng-click="ctrl.onReject()">
+                    <i class="fa fa-save"></i> {{'BUTTON.REJECT'|translate}}</button>
+                <button type="submit" class="btn btn-primary ng-binding" ng-click="ctrl.$state.go('service-registration');">
+                    <i class="fa fa-save"></i> {{'BUTTON.CANCEL'|translate}}</button>
+
+            </div>
+        </div>
+        <div class="box-body">
+            <form name="formApp" ng-submit="formApp.$valid && ctrl.onSubmit()">
+                <!-- hộ dân cư -->
+                <div class="row">
+                    <div class="form-group col-sm-6">
+                        <label for="buildingId" class="col-sm-3 required control-label" ng-bind="'LABEL.SERVICE_REGISTRATION.RESIDENT' |translate"></label>
+                        <div class="col-sm-9">
+                            <div class="col-sm-4 no-padding">
+                                <select ng-model="ctrl.serviceRegistration.buildingId" ng-disabled="ctrl.serviceRegistration.serviceRequestId" name="building"
+                                    id="buildingId" to-number required class="form-control" ng-change="ctrl.onBuildingChange()">
+                                    <option ng-if="!ctrl.serviceRegistration.serviceRequestId" value="" disabled selected>{{'LABEL.SERVICE_REGISTRATION.BUILDING' |translate}}</option>
+                                    <option ng-repeat="option in ctrl.listBuilding" value="{{option.buildingId}}">{{option.code}}</option>
+                                </select>
+                                <div class="box-validate">
+                                    <div ng-show="formApp.buildingId.$dirty && formApp.buildingId.$invalid" class="text-danger">
+                                        <i class="fa fa-times text-danger"></i>
+                                        <span ng-show="formApp.buildingId.$error.required" ng-bind="'SYSTEM.ERROR.REQUIRED' | translate"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 no-padding">
+                                <select ng-model="ctrl.serviceRegistration.floorId" id="floorId" ng-disabled="ctrl.serviceRegistration.serviceRequestId"
+                                    name="floor" to-number required class="form-control" ng-change="ctrl.onFloorChange()">
+                                    <option ng-if="!ctrl.serviceRegistration.serviceRequestId" value="" disabled selected>{{'LABEL.SERVICE_REGISTRATION.FLOOR' |translate}}</option>
+                                    <option ng-repeat="option in ctrl.listFloor" value="{{option.floorId}}">{{option.code}}</option>
+                                </select>
+                                <div class="box-validate">
+                                    <div ng-show="formApp.floorId.$dirty && formApp.floorId.$invalid" class="text-danger">
+                                        <i class="fa fa-times text-danger"></i>
+                                        <span ng-show="formApp.floorId.$error.required" ng-bind="'SYSTEM.ERROR.REQUIRED' | translate"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 no-padding">
+                                <select ng-model="ctrl.serviceRegistration.apartmentId" id="apartmentId" ng-disabled="ctrl.serviceRegistration.serviceRequestId"
+                                    to-number required name="apartment" class="form-control">
+                                    <option ng-if="!ctrl.serviceRegistration.serviceRequestId" value="" disabled selected>{{'LABEL.SERVICE_REGISTRATION.APARTMENT' |translate}}</option>
+                                    <option ng-repeat="option in ctrl.listApartment" value="{{option.apartmentId}}">{{option.name}}</option>
+                                </select>
+                                <div class="box-validate">
+                                    <div ng-show="formApp.apartmentId.$dirty && formApp.apartmentId.$invalid" class="text-danger">
+                                        <i class="fa fa-times text-danger"></i>
+                                        <span ng-show="formApp.apartmentId.$error.required" ng-bind="'SYSTEM.ERROR.REQUIRED' | translate"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- người đăng ký -->
+                <div class="row">
+                    <div class="col-sm-6 form-group">
+                        <label for="userID" class="col-sm-3 required control-label" ng-bind="'LABEL.SERVICE_REGISTRATION.REGISTER' |translate"></label>
+                        <div class="col-sm-9">
+                            <input disabled id="userID" type="text" ng-model="ctrl.userName" class=" form-control" name="userID" placeholder="{{'LABEL.SERVICE_REGISTRATION.REGISTER' | translate}}"
+                            />
+                            <div class="box-validate">
+                                <div ng-show="formApp.userID.$dirty && formApp.userID.$invalid" class="text-danger">
+                                    <i class="fa fa-times text-danger"></i>
+                                    <span ng-show="formApp.userID.$error.required" ng-bind="'SYSTEM.ERROR.REQUIRED' | translate"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        <label for="registrationType" class="col-sm-3 required control-label" ng-bind="'LABEL.SERVICE_REGISTRATION.REGISTERTYPE' |translate"></label>
+                        <div class="col-sm-9">
+                            <select ng-model="ctrl.serviceRegistration.registrationType" to-string name="registrationType" id="registrationType" class="form-control"
+                                required>
+                                <!-- <option ng-if="!ctrl.serviceRegistration.serviceRequestId" value="" disabled selected>{{'LABEL.SERVICE_REGISTRATION.REGISTERTYPE' |translate}}</option> -->
+                                <option ng-repeat="option in ctrl.listRegistrationType" value="{{option.type}}">{{option.name}}</option>
+                            </select>
+                            <div class="box-validate">
+                                <div ng-show="formApp.registrationType.$dirty && formApp.registrationType.$invalid" class="text-danger">
+                                    <i class="fa fa-times text-danger"></i>
+                                    <span ng-show="formApp.registrationType.$error.required" ng-bind="'SYSTEM.ERROR.REQUIRED' | translate"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- dịch vụ biểu phí -->
+                <div class="row">
+                    <div class="col-sm-6 form-group">
+                        <label for="serviceId" class="col-sm-3 required control-label" ng-bind="'LABEL.SERVICE_REGISTRATION.SERVICE' |translate"></label>
+                        <div class="col-sm-9">
+                            <select ng-model="ctrl.serviceRegistration.serviceId" id="serviceId" ng-disabled="ctrl.serviceRegistration.serviceRequestId"
+                                name="serviceId" class="form-control" to-number required ng-change="ctrl.onServiceChange()">
+                                <option ng-repeat="option in ctrl.listService.data" value="{{option.serviceId}}">{{'LABEL.SERVICE_NAME.' + option.serviceName | translate}}</option>
+                            </select>
+                            <div class="box-validate">
+                                <div ng-show="formApp.serviceId.$dirty && formApp.serviceId.$invalid" class="text-danger">
+                                    <i class="fa fa-times text-danger"></i>
+                                    <span ng-show="formApp.serviceId.$error.required" ng-bind="'SYSTEM.ERROR.REQUIRED' | translate"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        <label for="tariffId" class="col-sm-3 required control-label" ng-bind="'LABEL.SERVICE_REGISTRATION.FEEBILL' |translate"></label>
+                        <div class="col-sm-9">
+                            <select ng-model="ctrl.serviceRegistration.tariffId" id="tariffId" name="tariffId" ng-disabled="ctrl.serviceRegistration.serviceRequestId"
+                                class="form-control" to-number required>
+                                <option ng-repeat="option in ctrl.listTariffId" value="{{option.tariffId}}">{{option.tariffName}}</option>
+                            </select>
+                            <div class="box-validate">
+                                <div ng-show="formApp.tariffId.$dirty && formApp.tariffId.$invalid" class="text-danger">
+                                    <i class="fa fa-times text-danger"></i>
+                                    <span ng-show="formApp.tariffId.$error.required" ng-bind="'SYSTEM.ERROR.REQUIRED' | translate"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+        <!-- Đăng ký xe -->
+        <div class="row">
+            <div class="col-sm-12 form-group">
+                <label for="address" class="control-label" style="margin-left: 14px;" ng-bind="'LABEL.SERVICE_REGISTRATION.BIKEREGISTER' |translate"></label>
+                <input type="file" id="fBikeRegister" name="fBikeRegister" file-input="ctrl.listFBikeRegister" file-input-change="ctrl.onInputFileChange(ctrl.listFBikeRegister,'VEHICLE_REGISTRATION')"
+                    style="display: none;" multiple="true" accept=".xls,.xlsx,.docx,.doc" />
+                <ul class="inline-ul">
+                    <li class="list-inline-item" ng-repeat="file in ctrl.listFBikeRegister">
+                        <a>{{file.name}}</a>&nbsp
+                        <button type="button" ng-show="ctrl.listFBikeRegister.length>0" ng-click="ctrl.onRemoveFile(file,ctrl.listFBikeRegister,'fBikeRegister')">
+                            <i class="fa fa-minus" aria-hidden="true"></i>
+                        </button>
+                    </li>
+                    <li class="list-inline-item">
+
+                        <button type="button" ng-click="ctrl.onChooseFileClick('fBikeRegister');$event.stopPropagation()">
+                            <i class="fa fa-plus-square" aria-hidden="true"></i>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- chứng minh thư hộ chiếu -->
+        <div class="row">
+            <div class="col-sm-12 form-group">
+                <label for="address" class="control-label" style="margin-left: 14px;" ng-bind="'LABEL.SERVICE_REGISTRATION.ID_PARTPOST' |translate"></label>
+                <input type="file" id="fPartpost" name="fPartpost" file-input="ctrl.listFPartpost" file-input-change="ctrl.onInputFileChange(ctrl.listFPartpost,'VEHICLE_IDENTIFY_CARD')"
+                    style="display: none;" multiple="true" accept=".xls,.xlsx,.docx,.doc" />
+                <ul class="inline-ul">
+                    <li class="list-inline-item" ng-repeat="file in ctrl.listFPartpost">
+                        <a>{{file.name}}</a>
+                        &nbsp
+                        <button type="button" ng-show="ctrl.listFPartpost.length>0" ng-click="ctrl.onRemoveFile(file,ctrl.listFPartpost,'fPartpost')">
+                            <i class="fa fa-minus" aria-hidden="true"></i>
+                        </button>
+                    </li>
+                    <li class="list-inline-item">
+                        <button type="button" ng-click="ctrl.onChooseFileClick('fPartpost');$event.stopPropagation()">
+                            <i class="fa fa-plus-square" aria-hidden="true"></i>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 form-group">
+                <label for="address" class="control-label" style="margin-left: 14px;" ng-bind="'LABEL.SERVICE_REGISTRATION.HAPU_CONTRACT' |translate"></label>
+                <input type="file" id="fHapucontract" name="fHapucontract" file-input="ctrl.listFHapucontract" file-input-change="ctrl.onInputFileChange(ctrl.listFHapucontract,'VEHICLE_RED_BOOK')"
+                    style="display: none;" multiple="true" accept=".xls,.xlsx,.docx,.doc" />
+                <ul class="inline-ul">
+                    <li class="list-inline-item" ng-repeat="file in ctrl.listFHapucontract">
+                        <a>{{file.name}}</a>
+                        &nbsp
+                        <button type="button" ng-show="ctrl.listFHapucontract.length>0" ng-click="ctrl.onRemoveFile(file,ctrl.listFHapucontract,'fHapucontract')">
+                            <i class="fa fa-minus" aria-hidden="true"></i>
+                        </button>
+                    </li>
+                    <li class="list-inline-item">
+                        <button type="button" ng-click="ctrl.onChooseFileClick('fHapucontract');$event.stopPropagation()">
+                            <i class="fa fa-plus-square" aria-hidden="true"></i>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- hợp đồng thuê nhà -->
+        <div class="row">
+            <div class="col-sm-12 form-group">
+                <label for="address" class="control-label" style="margin-left: 14px;" ng-bind="'LABEL.SERVICE_REGISTRATION.RENTHOUSE_CONTRACT' |translate"></label>
+                <input type="file" id="fRenhouseContact" name="fRenhouseContact" file-input="ctrl.listFRenhouseContract" file-input-change="ctrl.onInputFileChange(ctrl.listFRenhouseContract,'VEHICLE_TENANCY_CONTRACT')"
+                    style="display: none;" multiple="true" accept=".xls,.xlsx,.docx,.doc" />
+                <ul class="inline-ul">
+                    <li class="list-inline-item" ng-repeat="file in ctrl.listFRenhouseContract">
+                        <a>{{file.name}}</a>
+                        &nbsp
+                        <button type="button" ng-show="ctrl.listFRenhouseContract.length>0" ng-click="ctrl.onRemoveFile(file,ctrl.listFRenhouseContract,'fRenhouseContact')">
+                            <i class="fa fa-minus" aria-hidden="true"></i>
+                        </button>
+                    </li>
+                    <li class="list-inline-item">
+                        <button type="button" ng-click="ctrl.onChooseFileClick('fRenhouseContact');$event.stopPropagation()">
+                            <i class="fa fa-plus-square" aria-hidden="true"></i>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- giấy tạm trú -->
+        <div class="row">
+            <div class="col-sm-12 form-group">
+                <label for="address" class="control-label" style="margin-left: 14px;" ng-bind="'LABEL.SERVICE_REGISTRATION.TEMPORARYREGISTRAION' |translate"></label>
+                <input type="file" id="fTemporaryRegistaion" name="fTemporaryRegistaion" file-input="ctrl.listFTemporaryRegistaion" file-input-change="ctrl.onInputFileChange(ctrl.listFTemporaryRegistaion,'VEHICLE_TEMPORARY_REGISTRATION')"
+                    style="display: none;" multiple="true" accept=".xls,.xlsx,.docx,.doc" />
+                <ul class="inline-ul">
+                    <li class="list-inline-item" ng-repeat="file in ctrl.listFTemporaryRegistaion">
+                        <a>{{file.name}}</a>
+                        &nbsp
+                        <button type="button" ng-show="ctrl.listFTemporaryRegistaion.length>0" ng-click="ctrl.onRemoveFile(file,ctrl.listFTemporaryRegistaion,'fTemporaryRegistaion')">
+                            <i class="fa fa-minus" aria-hidden="true"></i>
+                        </button>
+                    </li>
+                    <li class="list-inline-item">
+                        <button type="button" ng-click="ctrl.onChooseFileClick('fTemporaryRegistaion');$event.stopPropagation()">
+                            <i class="fa fa-plus-square" aria-hidden="true"></i>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- hộ khẩu giấy kết hôn -->
+        <div class="row">
+            <div class="col-sm-12 form-group">
+                <label for="fHouseholdMarried" class="control-label" style="margin-left: 14px;" ng-bind="'LABEL.SERVICE_REGISTRATION.HOUSEHOLD_MARRIED' |translate"></label>
+                <input type="file" id="fHouseholdMarried" name="fTemporaryRegistaion" file-input="ctrl.listFHouseholdMarried" file-input-change="ctrl.onInputFileChange(ctrl.listFHouseholdMarried,'VEHICLE_RELATIONSHIP')"
+                    style="display: none;" multiple="true" accept=".xls,.xlsx,.docx,.doc" />
+                <ul class="inline-ul">
+                    <li class="list-inline-item" ng-repeat="file in ctrl.listFHouseholdMarried">
+                        <a>{{file.name}}</a>
+                        &nbsp
+                        <button type="button" ng-show="ctrl.listFHouseholdMarried.length>0" ng-click="ctrl.onRemoveFile(file,ctrl.listFHouseholdMarried,'fHouseholdMarried')">
+                            <i class="fa fa-minus" aria-hidden="true"></i>
+                        </button>
+                    </li>
+                    <li class="list-inline-item">
+                        <button type="button" ng-click="ctrl.onChooseFileClick('fHouseholdMarried');$event.stopPropagation()">
+                            <i class="fa fa-plus-square" aria-hidden="true"></i>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- hợp đồng mua bán xe -->
+        <div class="row">
+            <div class="col-sm-12 form-group">
+                <label for="address" class="control-label" style="margin-left: 14px;" ng-bind="'LABEL.SERVICE_REGISTRATION.CARPURCHASECONTRACT' |translate"></label>
+                <input type="file" id="fCarpurchaseContract" name="fTemporaryRegistaion" file-input="ctrl.listFCarpurchaseContract" file-input-change="ctrl.onInputFileChange(ctrl.listFCarpurchaseContract,'VEHICLE_OWNER')"
+                    style="display: none;" multiple="true" accept=".xls,.xlsx,.docx,.doc" />
+                <ul class="inline-ul">
+                    <li class="list-inline-item" ng-repeat="file in ctrl.listFCarpurchaseContract">
+                        <a>{{file.name}}</a>
+                        &nbsp
+                        <button type="button" ng-show="ctrl.listFCarpurchaseContract.length>0" ng-click="ctrl.onRemoveFile(file,ctrl.listFCarpurchaseContract,'fCarpurchaseContract')">
+                            <i class="fa fa-minus" aria-hidden="true"></i>
+                        </button>
+                    </li>
+                    <li class="list-inline-item">
+                        <button type="button" ng-click="ctrl.onChooseFileClick('fCarpurchaseContract');$event.stopPropagation()">
+                            <i class="fa fa-plus-square" aria-hidden="true"></i>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- mẫu giấy tờ hapulico -->
+        <div class="row">
+            <div class="col-sm-12 form-group">
+                <label for="address" class="control-label" style="margin-left: 14px;" ng-bind="'LABEL.SERVICE_REGISTRATION.HAPULICOPAPER' |translate"></label>
+                <input type="file" id="fHapulicoPaper" name="fTemporaryRegistaion" file-input="ctrl.listFHapulicoPaper" file-input-change="ctrl.onInputFileChange(ctrl.listFHapulicoPaper,'VEHICLE_HAPULICO')"
+                    style="display: none;" multiple="true" accept=".xls,.xlsx,.docx,.doc" />
+                <ul class="inline-ul">
+                    <li class="list-inline-item" ng-repeat="file in ctrl.listFHapulicoPaper">
+                        <a>{{file.name}}</a>
+                        &nbsp
+                        <button type="button" ng-show="ctrl.listFHapulicoPaper.length>0" ng-click="ctrl.onRemoveFile(file,ctrl.listFHapulicoPaper,'fHapulicoPaper')">
+                            <i class="fa fa-minus" aria-hidden="true"></i>
+                        </button>
+                    </li>
+                    <li class="list-inline-item">
+                        <button type="button" ng-click="ctrl.onChooseFileClick('fHapulicoPaper');$event.stopPropagation()">
+                            <i class="fa fa-plus-square" aria-hidden="true"></i>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-check col-sm-12">
+                <label class="form-check-label" style="margin-left: 14px;">
+                    <input type="checkbox" ng-model="ctrl.serviceRegistration.vehicleOwner" class="form-check-input"> {{'LABEL.SERVICE_REGISTRATION.UNMANNEDCAR' |translate}}
+                </label>
+            </div>
+            <div class="form-check col-sm-12">
+                <label class="form-check-label" style="margin-left: 14px;">
+                    <input type="checkbox" ng-model="ctrl.serviceRegistration.vehicleCompany" class="form-check-input"> {{'LABEL.SERVICE_REGISTRATION.BUSINESSREGISTRAION' |translate}}
+                </label>
+            </div>
+        </div>
+        <!-- chủ sở hữu phương tiện -->
+        <div class="row" style="margin-top:15px">
+            <div class="col-sm-6 form-group">
+                <label for="vehicleOwnerName" class="col-sm-3 required control-label" ng-bind="'LABEL.SERVICE_REGISTRATION.VEHICLEOWNER' |translate"></label>
+                <div class="col-sm-9">
+                    <input ng-model="ctrl.serviceRegistration.vehicleOwnerName" required type="text" class="form-control" name="vehicleOwnerName"
+                        placeholder="{{'LABEL.SERVICE_REGISTRATION.NAME' | translate}}" />
+                    <div class="box-validate">
+                        <div ng-show="formApp.vehicleOwnerName.$dirty && formApp.vehicleOwnerName.$invalid" class="text-danger">
+                            <i class="fa fa-times text-danger"></i>
+                            <span ng-show="formApp.vehicleOwnerName.$error.required" ng-bind="'SYSTEM.ERROR.REQUIRED' | translate"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- biển kiểm soát hãng xe -->
+        <div class="row">
+            <div class="col-sm-6 form-group">
+                <label for="vehiclePlate" class="col-sm-3 required control-label" ng-bind="'LABEL.SERVICE_REGISTRATION.CARNUMBERPLATES' |translate"></label>
+                <div class="col-sm-9">
+                    <input ng-model="ctrl.serviceRegistration.vehiclePlate" id="vehiclePlate" type="text" required class="form-control" name="vehiclePlate"
+                        placeholder="{{'LABEL.SERVICE_REGISTRATION.CARNUMBERPLATES' | translate}}" />
+                    <div class="box-validate">
+                        <div ng-show="formApp.vehiclePlate.$dirty && formApp.vehiclePlate.$invalid" class="text-danger">
+                            <i class="fa fa-times text-danger"></i>
+                            <span ng-show="formApp.vehiclePlate.$error.required" ng-bind="'SYSTEM.ERROR.REQUIRED' | translate"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 form-group">
+                <label for="vehicleBrand" class="col-sm-3 control-label" ng-bind="'LABEL.SERVICE_REGISTRATION.AUTOMAKER' |translate"></label>
+                <div class="col-sm-9">
+                    <input ng-model="ctrl.serviceRegistration.vehicleBrand" type="text" class="form-control" name="vehicleBrand" placeholder="{{'LABEL.SERVICE_REGISTRATION.AUTOMAKER' | translate}}"
+                    />
+                    <div class="box-validate">
+                        <div ng-show="formApp.vehicleBrand.$dirty && formApp.vehicleBrand.$invalid" class="text-danger">
+                            <i class="fa fa-times text-danger"></i>
+                            <span ng-show="formApp.vehicleBrand.$error.required" ng-bind="'SYSTEM.ERROR.REQUIRED' | translate"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- mẫu xe -->
+        <div class="row ">
+            <div class="col-sm-6 form-group">
+                <label for="vehicleModel" class="col-sm-3 control-label" ng-bind="'LABEL.SERVICE_REGISTRATION.CARMODEL' |translate"></label>
+                <div class="col-sm-9">
+                    <input ng-model="ctrl.serviceRegistration.vehicleModel" type="text" class="form-control" name="vehicleModel" placeholder="{{'LABEL.SERVICE_REGISTRATION.CARMODEL' | translate}}"
+                    />
+                </div>
+            </div>
+            <div class="col-sm-6 form-group">
+                <label for="vehicleColor" class="col-sm-3 control-label" ng-bind="'LABEL.SERVICE_REGISTRATION.CARCOLOR' |translate"></label>
+                <div class="col-sm-9">
+                    <input ng-model="ctrl.serviceRegistration.vehicleColor" type="text" class="form-control" name="vehicleColor" placeholder="{{'LABEL.SERVICE_REGISTRATION.CARCOLOR' | translate}}"
+                    />
+                </div>
+            </div>
+        </div>
+        <!-- ngày bắt đầu ngày kết thúc -->
+        <div class="row">
+            <div class="col-sm-6 form-group">
+                <label for="apartmentServiceStart" class="col-sm-3 control-label" ng-bind="'LABEL.SERVICE_REGISTRATION.STARTDATE' |translate"></label>
+                <div class="col-sm-9">
+                    <!-- <input ng-model="ctrl.serviceRegistration.apartmentServiceStart" ng-disabled="!ctrl.serviceRegistration.serviceRequestId" type="date" class="form-control" name="apartmentServiceStart" placeholder="{{'LABEL.SERVICE_REGISTRATION.STARTDATE' | translate}}"/> -->
+                    <div class="input-group">
+                        <input type="text" class="form-control" ng-disabled="!ctrl.serviceRegistration.serviceRequestId" uib-datepicker-popup="dd/MM/yyyy"
+                            ng-model="ctrl.serviceRegistration.apartmentServiceStart" ng-required="false" close-text="Close"
+                            is-open="ctrl.apartmentServiceStartShow" />
+                        <span class="input-group-addon" ng-click="ctrl.apartmentServiceStartShow = true">
+                            <i class="fa fa-calendar" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 form-group">
+                <label for="apartmentServiceEnd" class="col-sm-3 control-label" ng-bind="'LABEL.SERVICE_REGISTRATION.ENDDATE' |translate"></label>
+                <div class="col-sm-9">
+                    <!-- <input ng-model="ctrl.serviceRegistration.apartmentServiceEnd" ng-disabled="!ctrl.serviceRegistration.serviceRequestId"  type="date" class="form-control" name="apartmentServiceEnd" placeholder="{{'LABEL.SERVICE_REGISTRATION.ENDDATE' | translate}}"
+                            /> -->
+                    <div class="input-group">
+                        <input type="text" class="form-control" ng-disabled="!ctrl.serviceRegistration.serviceRequestId" uib-datepicker-popup="dd/MM/yyyy"
+                            ng-model="ctrl.serviceRegistration.apartmentServiceEnd" ng-required="false" close-text="Close" is-open="ctrl.apartmentServiceEndShow"
+                        />
+                        <span class="input-group-addon" ng-click="ctrl.apartmentServiceEndShow = true">
+                            <i class="fa fa-calendar" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- mã số thẻ -->
+        <div class="row">
+            <div class="col-sm-6 form-group">
+                <label for="vehicleRegisCard" class="col-sm-3 control-label" ng-bind="'LABEL.SERVICE_REGISTRATION.CARDID' |translate"></label>
+                <div class="col-sm-9">
+                    <input type="text" ng-model="ctrl.serviceRegistration.vehicleRegisCard" ng-disabled="!ctrl.serviceRegistration.serviceRequestId"
+                        class="form-control" name="vehicleRegisCard" placeholder="{{'LABEL.SERVICE_REGISTRATION.CARDID' | translate}}"
+                    />
+                </div>
+            </div>
+        </div>
+        <!-- vị trí đỗ -->
+        <div class="row">
+            <div class="col-sm-6 form-group">
+                <label for="vehicleParkingLot" class="col-sm-3 control-label" ng-bind="'LABEL.SERVICE_REGISTRATION.LOCATIONPARKING' |translate"></label>
+                <div class="col-sm-9">
+                    <input type="text" ng-model="ctrl.serviceRegistration.vehicleParkingLot" id="vehicleParkingLot" ng-disabled="!ctrl.serviceRegistration.serviceRequestId"
+                        class="form-control" name="vehicleParkingLot" placeholder="{{'LABEL.SERVICE_REGISTRATION.LOCATIONPARKING' | translate}}"
+                    />
+                </div>
+            </div>
+        </div>
+        <!-- mẫu thông báo -->
+        <!-- <div class="row">
+                    <div class="col-sm-6 form-group">
+                        <label for="templateId" class="col-sm-3 control-label" ng-bind="'LABEL.SERVICE_REGISTRATION.REPORTPAPER' |translate"></label>
+                        <div class="col-sm-9">
+                            <select ng-model="ctrl.serviceRegistration.templateId" id="templateId" class="form-control" to-number>
+                                <option ng-repeat="option in ctrl.listTemplate.data" value="{{option.templateId}}">{{option.templateName}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div> -->
+        <!-- tiêu đề -->
+        <div class="row">
+            <div class="col-sm-6 form-group">
+                <label for="replyMessageTitle" class="col-sm-3 control-label" ng-bind="'LABEL.SERVICE_REGISTRATION.TITLE' |translate"></label>
+                <div class="col-sm-9">
+                    <input ng-model="ctrl.serviceRegistration.replyMessageTitle" type="text" class="form-control" name="replyMessageTitle" placeholder="{{'LABEL.SERVICE_REGISTRATION.TITLE' | translate}}"
+                    />
+                </div>
+            </div>
+        </div>
+        <!-- nội dung -->
+        <div class="row">
+            <div class="col-sm-6 form-group">
+                <label for="replyMessageContent" class="col-sm-3 control-label" ng-bind="'LABEL.SERVICE_REGISTRATION.CONTENT' |translate"></label>
+                <div class="col-sm-9">
+                    <textarea class="form-control textarea-nonresize" ng-model="ctrl.serviceRegistration.replyMessageContent" rows="5" id="replyMessageContent"
+                        placeholder="{{'LABEL.SERVICE_REGISTRATION.CONTENT' | translate}}"></textarea>
+                </div>
+            </div>
+        </div>
+        </form>
+    </div>
+    </div>
+</section>
+<!-- /.content -->

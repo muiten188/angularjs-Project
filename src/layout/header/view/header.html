@@ -1,0 +1,100 @@
+<a href="javascript:void(0)" class="sidebar-toggle" data-toggle="push-menu" role="button">
+	<span class="sr-only">Toggle navigation</span>
+	<span class="icon-bar"></span>
+	<span class="icon-bar"></span>
+	<span class="icon-bar"></span>
+</a>
+
+<!-- Navbar Right Menu -->
+<div class="navbar-custom-menu">
+	<ul class="nav navbar-nav">
+		<!-- Notifications Menu -->
+		<li class="dropdown notifications-menu">
+			<!-- Menu toggle button -->
+			<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
+				<i class="fa fa-bell-o"></i>
+				<span class="label label-warning">{{ctrl.notifications.total}}</span>
+			</a>
+			<ul class="dropdown-menu">
+				<li class="header">You have {{ctrl.notifications.total}} notifications</li>
+				<li>
+					<!-- Inner Menu: contains the notifications -->
+					<ul class="menu">
+						<li ng-repeat="notification in ctrl.notifications.data track by $index">
+							<!-- start notification -->
+							<a href="javascript:void(0)" ng-click="ctrl.onShowNotification(notification)">
+								<i class="fa fa-bell-o"></i> {{notification.time | date: 'HH:mm:ss'}} {{notification.title}}
+							</a>
+						</li>
+						<!-- end notification -->
+					</ul>
+				</li>
+				<li class="footer">
+					<a href="#">View all</a>
+				</li>
+			</ul>
+		</li>
+		<!-- User Account Menu -->
+		<li class="dropdown user user-menu">
+			<!-- Menu Toggle Button -->
+			<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
+				<!-- The user image in the navbar-->
+				<img src="assert/images/user2-160x160.jpg" class="user-image" alt="User Image" />
+				<!-- hidden-xs hides the username on small devices so only the image appears. -->
+				<span class="hidden-xs">
+					<span context-value key="userContext" sub="userName"></span>
+				</span>
+			</a>
+			<ul class="dropdown-menu">
+				<!-- The user image in the menu -->
+				<li class="user-header">
+					<img src="assert/images/user2-160x160.jpg" class="img-circle" alt="User Image" />
+					<p>
+						<span context-value key="userContext" sub="userName"></span> -
+						<span context-value key="userContext" sub="userType">
+					</p>
+					<p>
+						<span>Email</span>:
+						<span context-value key="userContext" sub="email">
+					</p>
+					<p>
+						<span>Mobile</span>:
+						<span context-value key="userContext" sub="phoneNumber">
+					</p>
+				</li>
+				<!-- Menu Footer-->
+				<li class="user-footer">
+					<div class="pull-left">
+						<a href="javascript:void(0)" ng-click="ctrl.onChangePassword()" class="btn btn-default btn-flat">{{'LABEL.USER.CHANGE_PASSWORD' | translate }}</a>
+					</div>
+					<div class="pull-right">
+						<a href="javascript:void(0)" ng-click="ctrl.onLogout()" class="btn btn-default btn-flat">{{'LABEL.USER.SIGN_OUT' | translate }}</a>
+					</div>
+				</li>
+			</ul>
+		</li>
+		<!-- Language Menu -->
+		<li class="dropdown notifications-menu language-menu">
+			<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
+				<i class="fa fa-language" aria-hidden="true"></i>
+			</a>
+			<ul class="dropdown-menu">
+				<li>
+					<ul class="menu">
+						<li>
+							<a href="javascript:void(0)" ng-click="ctrl.onChangeLanguage('vi')">
+								<i ng-class="ctrl.currentLanguage == 'vi' ? 'fa fa-flag-checkered text-blue' : 'fa fa-flag-o'" aria-hidden="true"></i> Tiếng Việt
+							</a>
+						</li>
+						<li>
+							<a href="javascript:void(0)" ng-click="ctrl.onChangeLanguage('en')">
+								<i ng-class="ctrl.currentLanguage == 'en' ? 'fa fa-flag-checkered text-blue' : 'fa fa-flag-o'" aria-hidden="true"></i> English
+							</a>
+						</li>
+					</ul>
+				</li>
+
+			</ul>
+		</li>
+	</ul>
+</div>

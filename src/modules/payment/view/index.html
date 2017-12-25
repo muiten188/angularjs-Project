@@ -1,0 +1,123 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <h1>{{ 'MENU.PAYMENT' | translate }}
+    <!-- <small>{{ 'MENU.PAYMENT' | translate }}</small> -->
+  </h1>
+</section>
+<!-- Main content -->
+<section class="content">
+  <div class="box">
+    <div class="box-body no-padding">
+      <div class="form-search clearfix">
+        <div class="col-sm-9 search-controls">
+          <div class="row-no-padding">
+            <div class="form-group col-md-2">
+              <label class="sr-only">{{'LABEL.COMMON.APARTMENT' |translate}}</label>
+              <div class="input-group">
+                <div class="input-group-addon">
+                  <i class="fa fa-list-ol" aria-hidden="true"></i>
+                </div>
+                <input type="text" class="form-control input-sm" ng-model="ctrl.payment.apartmentName" placeholder="{{'LABEL.COMMON.APARTMENT' |translate}}">
+              </div>
+            </div>
+            <div class="form-group col-md-2">
+              <label class="sr-only">{{'LABEL.INVOICE.MONTH' |translate}}</label>
+              <div class="input-group">
+                <input type="text" class="form-control input-sm" uib-datepicker-popup="MM/yyyy" ng-model="ctrl.payment.monthDate" ng-required="false"
+                  close-text="Close" is-open="ctrl.payment.show" />
+                <span class="input-group-addon" ng-click="ctrl.payment.show = true">
+                  <i class="fa fa-calendar" aria-hidden="true"></i>
+                </span>
+              </div>
+            </div>
+            <div class="form-group col-md-2">
+              <label class="sr-only">{{'LABEL.INVOICE.CODE' |translate}}</label>
+              <div class="input-group">
+                <div class="input-group-addon">
+                  <i class="fa fa-list-ol" aria-hidden="true"></i>
+                </div>
+                <input type="text" class="form-control input-sm" ng-model="ctrl.payment.invoiceId" placeholder="{{'LABEL.INVOICE.CODE' |translate}}">
+              </div>
+            </div>
+            <div class="form-group col-md-2">
+              <label class="sr-only">{{'LABEL.PAYMENT_METHOD.PLACE_HOLDER' |translate}}</label>
+              <div class="input-group">
+                <div class="input-group-addon">
+                  <i class="fa fa-list-ol" aria-hidden="true"></i>
+                </div>
+                <sm-payment-method ng-model="ctrl.payment.paymentMethod" sm-class="form-control input-sm" sm-input="true" />
+              </div>
+            </div>
+            <button type="button" class="btn btn-primary btn-sm btn-search-small" ng-click="ctrl.onSearch({pageIndex: 1})">
+              <i class="fa fa-search"></i>
+            </button>
+          </div>
+        </div>
+        <div class="col-sm-3 search-buttons">
+          <button type="button" class="btn btn-primary btn-sm btn-search-large" ng-click="ctrl.onSearch({pageIndex: 1})">
+            <i class="fa fa-search"></i> Tìm kiếm
+          </button>
+          <button type="button" class="btn btn-primary btn-sm" ng-click="ctrl.onCreate()">
+            <i class="fa fa-plus"></i> {{ 'BUTTON.CREATE' | translate }}</button>
+        </div>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover" st-table st-click="ctrl.onSearch(paging)">
+          <thead>
+            <tr>
+              <th>{{ 'LABEL.BUILDING.CODE' | translate }}</th>
+              <th>{{ 'LABEL.FLOOR.CODE' | translate }}</th>
+              <th>{{ 'LABEL.COMMON.APARTMENT' | translate }}</th>
+              <th>{{ 'LABEL.COMMON.MONTH' | translate }}</th>
+              <th>{{ 'LABEL.INVOICE.AMOUNT' | translate }}</th>
+              <th>{{ 'LABEL.COMMON.UPDATED_DATE' | translate }}</th>
+              <th>{{ 'LABEL.COMMON.SENT_DATE' | translate }}</th>
+              <th>{{ 'LABEL.COMMON.STATUS' | translate }} </th>
+              <th>{{ 'LABEL.COMMON.PAYMENT' | translate }} </th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="model in ctrl.datasource.data">
+              <td>{{ model.buildingCode }}</td>
+              <td>{{ model.floorCode }}</td>
+              <td>{{ model.apartmentName }}</td>
+              <td>{{ model.month }}</td>
+              <td>{{ model.amount }}</td>
+              <td>{{ model.updateDate }}</td>
+              <td>{{ model.sentDate }}</td>
+              <td>
+                <sm-message-status ng-value="model.messageStatus" />
+              </td>
+              <td>
+                <sm-payment-status ng-value="model.paymentStatus" />
+              </td>
+              <td class="text-center">
+                <button type="button" class="btn btn-primary btn-xs" ng-click="ctrl.onUpdate(model)">
+                  <i class="fa fa-edit"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- /.box-body -->
+    <div class="box-footer clearfix">
+      <div class="col-md-4">
+        <sm-records count="ctrl.datasource.totalElement" />
+      </div>
+      <div class="col-md-4">
+        <ul uib-pagination boundary-links="true" ng-show="ctrl.datasource.totalElement > 0" ng-model="ctrl.currentPage" boundary-link-numbers="true"
+          max-size="5" ng-change="ctrl.onSearch({pageIndex: ctrl.currentPage})" total-items="ctrl.datasource.totalElement"
+          items-per-page="ctrl.datasource.pageSize" class="pagination pagination-sm no-margin" previous-text="&lsaquo;" next-text="&rsaquo;"
+          first-text="&laquo;" last-text="&raquo;"></ul>
+      </div>
+      <div class="col-md-4 text-right">
+        <sm-page-size ng-model="ctrl.payment.pageSize" />
+      </div>
+    </div>
+  </div>
+  <!-- /.box -->
+</section>
+<!-- /.content -->

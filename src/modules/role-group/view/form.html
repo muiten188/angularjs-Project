@@ -1,0 +1,36 @@
+<sm-modal-dialog modal-title="{{(ctrl.roleGroup.roleGroupId ? 'LABEL.COMMON.UPDATE' : 'LABEL.COMMON.CREATE') | translate }}"
+    type="{{ctrl.roleGroup.roleGroupId ? 'update' : 'create'}}">
+    <form novalidate name="formApp" class="form-horizontal" ng-submit="formApp.$valid && ctrl.onSubmit()">
+        <input ng-if="ctrl.roleGroup.roleGroupId" type="hidden" ng-model="ctrl.roleGroup.roleGroupId" />
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="roleGroupName" class="col-sm-3 control-label required" ng-bind="'LABEL.ROLE_GROUP.NAME' |translate"></label>
+                <div class="col-sm-9">
+                    <input ng-model="ctrl.roleGroup.roleGroupName" type="text" class="form-control" name="roleGroupName" placeholder="{{'LABEL.ROLE_GROUP.PLACE_HOLDER_NAME' | translate}}"
+                        maxlength="20" required />
+                    <div class="box-validate">
+                        <div ng-show="formApp.roleGroupName.$dirty && formApp.roleGroupName.$invalid" class="text-danger">
+                            <i class="fa fa-times text-danger"></i>
+                            <span ng-show="formApp.roleGroupName.$error.required" ng-bind="'SYSTEM.ERROR.REQUIRED' | translate"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="description" class="col-sm-3 control-label" ng-bind="'LABEL.ROLE_GROUP.DESCRIPTION' |translate"></label>
+                <div class="col-sm-9">
+                    <input ng-model="ctrl.roleGroup.description" type="text" class="form-control" name="description" placeholder="{{'LABEL.ROLE_GROUP.PLACE_HOLDER_DESCRIPTION' | translate}}"
+                        maxlength="160" />
+                </div>
+            </div>
+
+            <div >
+                <tree-view tree-data="ctrl.roleData" ng-model="ctrl.roleModel" use-checkbox="true" />
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button ng-disabled="!formApp.$dirty || !formApp.$valid" type="submit" class="btn btn-primary">
+                <i ng-class="(ctrl.roleGroup.roleGroupId ? 'fa fa-edit' : 'fa fa-plus')"></i> {{ (ctrl.roleGroup.roleGroupId ? 'BUTTON.UPDATE' : 'BUTTON.CREATE') | translate }}</button>
+        </div>
+    </form>
+</sm-modal-dialog>

@@ -1,0 +1,9 @@
+<span>
+  <select ng-show="smInput" ng-model="residentType" ng-change="ngChange()" ng-class="smClass" ng-required="smRequired" ng-readonly="smReadonly">
+    <option value>-----{{'LABEL.RESIDENT_TYPE.ROLE' | translate}}-----</option>
+    <option ng-repeat="option in options" value="{{option.value}}">{{option.title | translate}}</option>
+  </select>
+  <span ng-show="!smInput">
+    {{residentTypeValue | translate}}
+  </span>
+</span>

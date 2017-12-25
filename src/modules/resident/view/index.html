@@ -1,0 +1,124 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <h1>{{ 'MENU.RESIDENT' | translate }}
+    <!-- <small>  {{ 'MENU.RESIDENT' | translate }}</small> -->
+  </h1>
+</section>
+<!-- Main content -->
+<section class="content">
+  <div class="box">
+    <div class="box-body table-responsive no-padding">
+      <div class="form-search clearfix">
+        <div class="col-sm-9 search-controls">
+          <div class="row-no-padding">
+            <div class="form-group col-sm-3">
+              <label class="sr-only">{{'LABEL.RESIDENT.CODE' |translate}}</label>
+              <div class="input-group">
+                <div class="input-group-addon">
+                  <i class="fa fa-info" aria-hidden="true"></i>
+                </div>
+                <input type="text" class="form-control input-sm" ng-model="ctrl.resident.residentName" placeholder="{{'LABEL.RESIDENT.PLACE_HOLDER_FULL_NAME' |translate}}">
+              </div>
+            </div>
+            <div class="form-group col-sm-3">
+              <label class="sr-only">{{'LABEL.RESIDENT.PHONE_NUMBER' |translate}}</label>
+              <div class="input-group">
+                <div class="input-group-addon">
+                  <i class="fa fa-info" aria-hidden="true"></i>
+                </div>
+                <input type="text" class="form-control input-sm" ng-model="ctrl.resident.phoneNumber" placeholder="{{'LABEL.RESIDENT.PLACE_HOLDER_PHONE_NUMBER' |translate}}">
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-sm btn-search-small" ng-click="ctrl.onSearch({pageIndex: 1})">
+              <i class="fa fa-search"></i>
+            </button>
+          </div>
+        </div>
+        <div class="col-sm-3 search-buttons">
+          <button type="submit" class="btn btn-primary btn-sm btn-search-large" ng-click="ctrl.onSearch({pageIndex: 1})">
+            <i class="fa fa-search"></i> Tìm kiếm
+          </button>
+          <!-- <button type="button" class="btn btn-primary btn-sm" ng-click="ctrl.onImport()">
+            <i class="fa fa-chevron-circle-right"></i> {{ 'BUTTON.IMPORT' | translate }}</button> -->
+          <button type="button" class="btn btn-danger btn-sm" ng-click="ctrl.onDeleteMulti()">
+            <i class="fa fa-trash"></i> {{ 'BUTTON.DELETE' | translate }}</button>
+          <button type="submit" class="btn btn-primary btn-sm" ng-click="ctrl.onCreate()">
+            <i class="fa fa-plus"></i> {{ 'BUTTON.CREATE' | translate }}</button>
+        </div>
+      </div>
+      <table class="table table-bordered table-hover" st-table st-click="ctrl.onSearch(paging)">
+        <thead>
+          <tr>
+            <th class="text-center" style="width: 30px">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" ng-click="ctrl.onCheckAll()" ng-model="ctrl.isCheckAll" />
+                  <span class="cr">
+                    <i class="cr-icon fa fa-check"></i>
+                  </span>
+                </label>
+              </div>
+            </th>
+            <th class="sort" sort-by="code">{{ 'LABEL.RESIDENT.CODE' | translate }}</th>
+            <th>{{ 'LABEL.RESIDENT.FULL_NAME' | translate }}</th>
+            <th>{{ 'LABEL.RESIDENT.BIRTHDAY' | translate }}</th>
+            <th>{{ 'LABEL.RESIDENT.GENDER' | translate }}</th>
+            <!-- <th>{{ 'LABEL.RESIDENT.IDENTITY' | translate }}</th> -->
+            <th>{{ 'LABEL.RESIDENT.EMAIL' | translate }}</th>
+            <th>{{ 'LABEL.RESIDENT.PHONE_NUMBER_1' | translate }}</th>
+            <!-- <th>{{ 'LABEL.RESIDENT.PHONE_NUMBER_2' | translate }}</th> -->
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="model in ctrl.datasource.data">
+            <td class="text-center">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" ng-click="ctrl.onCheckItem(model.residentId)" ng-model="ctrl.checkBoxes[model.residentId]" />
+                  <span class="cr">
+                    <i class="cr-icon fa fa-check"></i>
+                  </span>
+                </label>
+              </div>
+            </td>
+            <td>{{ model.residentId }}</td>
+            <td>{{ model.surname }} {{ model.firstname }} </td>
+            <td>{{ model.birthday | date : 'dd/MM/yyyy' }}</td>
+            <td><sm-gender ng-value="model.gender" /></td>
+            <!-- <td>{{ model.identifyCard }}</td> -->
+            <td>{{ model.email }}</td>
+            <td>{{ model.phoneNumber }}</td>
+            <!-- <td>{{ model.subPhoneNumber }}</td> -->
+            
+            <td class="text-center">
+              <button type="button" class="btn btn-primary btn-xs" ng-click="ctrl.onUpdate(model)">
+                <i class="fa fa-edit"></i>
+              </button>
+              <button type="button" class="btn btn-danger btn-xs" ng-click="ctrl.onDelete(model)">
+                <i class="fa fa-trash"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- /.box-body -->
+    <div class="box-footer clearfix">
+      <div class="col-md-4">
+        <sm-records count="ctrl.datasource.totalElement" />
+      </div>
+      <div class="col-md-4">
+        <ul uib-pagination boundary-links="true" ng-show="ctrl.datasource.totalElement > 0" ng-model="ctrl.currentPage" boundary-link-numbers="true"
+          max-size="5" ng-change="ctrl.onSearch({pageIndex: ctrl.currentPage})" total-items="ctrl.datasource.totalElement"
+          items-per-page="ctrl.datasource.pageSize" class="pagination pagination-sm no-margin" previous-text="&lsaquo;" next-text="&rsaquo;"
+          first-text="&laquo;" last-text="&raquo;"></ul>
+      </div>
+      <div class="col-md-4 text-right">
+        <sm-page-size ng-model="ctrl.resident.pageSize" />
+      </div>
+    </div>
+  </div>
+  <!-- /.box -->
+</section>
+<!-- /.content -->

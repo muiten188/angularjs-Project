@@ -1,0 +1,196 @@
+<sm-modal-dialog modal-title="{{(ctrl.requestUpdate.residentId ? 'LABEL.COMMON.UPDATE' : 'LABEL.COMMON.CREATE') | translate }}"
+    type="{{ctrl.requestUpdate.residentId ? 'update' : 'create'}}">
+    <form novalidate name="formApp" class="form-horizontal" ng-submit="formApp.$valid && ctrl.onSubmit()">
+        <input ng-if="ctrl.requestUpdate.residentId" type="hidden" ng-model="ctrl.requestUpdate.residentId" />
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="thumbnail">
+                        <div ngf-select="ctrl.uploadFile($file)" ng-model="files" ngf-multiple="false" ngf-allow-dir="true" class="drop-box" ngf-drag-over-class="'dragover'"
+                            accept="image/*" ngf-pattern="'image/*'" style="width:100%; height: 200px;">
+                            <a ng-if="ctrl.requestUpdate.avatar" href="javascript:void(0)">
+                                <sm-image img-path="{{ctrl.requestUpdate.avatar}}" img-style="width:100%; max-height: 200px;" />
+                            </a>
+                            <div ng-if="!ctrl.requestUpdate.avatar" style="font-size: 10em; width: 150px; margin: 0px auto; cursor: pointer">
+                                <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-4 control-label required" ng-bind="'LABEL.REQUEST_UPDATE.FIRST_NAME' |translate"></label>
+                        <div class="col-sm-8">
+                            <input ng-model="ctrl.requestUpdate.surname" type="text" class="form-control" name="surname" placeholder="{{'LABEL.REQUEST_UPDATE.PLACE_HOLDER_SUR_NAME' | translate}}"
+                                maxlength="100" required />
+                            <div class="box-validate">
+                                <div ng-show="formApp.surname.$dirty && formApp.surname.$invalid" class="text-danger">
+                                    <i class="fa fa-times text-danger"></i>
+                                    <span ng-show="formApp.surname.$error.required" ng-bind="'SYSTEM.ERROR.REQUIRED' | translate"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="surname" class="col-sm-4 control-label required" ng-bind="'LABEL.REQUEST_UPDATE.SUR_NAME' |translate"></label>
+
+                        <!-- <label for="firstname" class="col-sm-4 control-label required" ng-bind="'LABEL.REQUEST_UPDATE.FIRST_NAME' |translate"></label> -->
+                        <div class="col-sm-8">
+                            <input ng-model="ctrl.requestUpdate.firstname" type="text" class="form-control" name="firstname" placeholder="{{'LABEL.REQUEST_UPDATE.PLACE_HOLDER_FIRST_NAME' | translate}}"
+                                maxlength="100" required />
+                            <!-- <sm-description value="{{ 'LABEL.RESIDENT.FULL_NAME' |translate }} {{ home.name }}" /> -->
+                            <div class="box-validate">
+                                <div ng-show="formApp.firstname.$dirty && formApp.firstname.$invalid" class="text-danger">
+                                    <i class="fa fa-times text-danger"></i>
+                                    <span ng-show="formApp.firstname.$error.required" ng-bind="'SYSTEM.ERROR.REQUIRED' | translate"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="birthday" class="col-sm-4 required control-label" ng-bind="'LABEL.REQUEST_UPDATE.BIRTHDAY' |translate"></label>
+                        <div class="col-sm-8">
+                            <div class="input-group">
+                                <input type="text" class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="ctrl.requestUpdate.birthday" ng-required="false"
+                                    close-text="Close" is-open="ctrl.requestUpdate.show" />
+                                <span class="input-group-addon" ng-click="ctrl.requestUpdate.show = true">
+                                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="gender" class="col-sm-4 control-label required" ng-bind="'LABEL.REQUEST_UPDATE.GENDER' |translate"></label>
+                        <div class="col-sm-8">
+                            <sm-gender ng-model="ctrl.requestUpdate.gender" ng-class="form-control" ng-required="false" sm-input="true" />
+                            <div class="box-validate">
+                                <div ng-show="formApp.gender.$dirty && formApp.gender.$invalid" class="text-danger">
+                                    <i class="fa fa-times text-danger"></i>
+                                    <span ng-show="formApp.gender.$error.required" ng-bind="'SYSTEM.ERROR.REQUIRED' | translate"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="identifyCard" class="col-sm-4 control-label" ng-bind="'LABEL.REQUEST_UPDATE.IDENTITY' |translate"></label>
+                        <div class="col-sm-8">
+                            <input ng-model="ctrl.requestUpdate.identifyCard" type="text" class="form-control" name="identifyCard" placeholder="{{'LABEL.REQUEST_UPDATE.PLACE_HOLDER_IDENTITY' | translate}}"
+                                maxlength="50" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class=" form-group">
+                        <label for="phoneNumber" class="col-sm-4 control-label required" ng-bind="'LABEL.REQUEST_UPDATE.PHONE_NUMBER_1' |translate"></label>
+                        <div class="col-sm-8">
+                            <input ng-model="ctrl.requestUpdate.phoneNumber" type="text" class="form-control" name="phoneNumber" placeholder="{{'LABEL.REQUEST_UPDATE.PLACE_HOLDER_PHONE_NUMBER_1' | translate}}"
+                                maxlength="25" required />
+                            <div class="box-validate">
+                                <div ng-show="formApp.phoneNumber.$dirty && formApp.phoneNumber.$invalid" class="text-danger">
+                                    <i class="fa fa-times text-danger"></i>
+                                    <span ng-show="formApp.phoneNumber.$error.required" ng-bind="'SYSTEM.ERROR.REQUIRED' | translate"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="subPhoneNumber" class="col-sm-4 control-label" ng-bind="'LABEL.REQUEST_UPDATE.PHONE_NUMBER_2' |translate"></label>
+                        <div class="col-sm-8">
+                            <input ng-model="ctrl.requestUpdate.subPhoneNumber" type="text" class="form-control" name="subPhoneNumber" placeholder="{{'LABEL.REQUEST_UPDATE.PLACE_HOLDER_PHONE_NUMBER_2' | translate}}"
+                                maxlength="25" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group ">
+                        <label for="email" class="col-sm-4 control-label required" ng-bind="'LABEL.REQUEST_UPDATE.EMAIL' |translate"></label>
+                        <div class="col-sm-8">
+                            <input ng-model="ctrl.requestUpdate.email" type="email" class="form-control" name="email" placeholder="{{'LABEL.REQUEST_UPDATE.PLACE_HOLDER_EMAIL' | translate}}"
+                                maxlength="255" required />
+                            <div class="box-validate">
+                                <div ng-show="formApp.email.$dirty && formApp.email.$invalid" class="text-danger">
+                                    <i class="fa fa-times text-danger"></i>
+                                    <span ng-show="formApp.email.$error.required" ng-bind="'SYSTEM.ERROR.REQUIRED' | translate"></span>
+                                    <span ng-show="formApp.email.$error.email" ng-bind="'SYSTEM.ERROR.EMAIL' | translate"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class=" form-group">
+                        <label for="origin" class="col-sm-4 control-label " ng-bind="'LABEL.REQUEST_UPDATE.BIRTHPLACE' |translate"></label>
+                        <div class="col-sm-8">
+                            <input ng-model="ctrl.requestUpdate.origin" type="text" class="form-control" name="origin" placeholder="{{'LABEL.REQUEST_UPDATE.PLACE_HOLDER_BIRTHPLACE' | translate}}"
+                                maxlength="45" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="occupation" class="col-sm-4 control-label " ng-bind="'LABEL.REQUEST_UPDATE.JOB' |translate"></label>
+                        <div class="col-sm-8">
+                            <input ng-model="ctrl.requestUpdate.occupation" type="text" class="form-control" name="occupation" placeholder="{{'LABEL.REQUEST_UPDATE.PLACE_HOLDER_JOB' | translate}}"
+                                maxlength="200" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group ">
+                        <label for="account" class="col-sm-4 control-label required" ng-bind="'LABEL.REQUEST_UPDATE.ACCOUNT' |translate"></label>
+                        <div class="col-sm-8">
+                            <input ng-model="ctrl.requestUpdate.account" type="text" class="form-control" name="account" placeholder="{{'LABEL.REQUEST_UPDATE.PLACE_HOLDER_ACCOUNT' | translate}}"
+                                maxlength="50" required />
+                            <div class="box-validate">
+                                <div ng-show="formApp.account.$dirty && formApp.account.$invalid" class="text-danger">
+                                    <i class="fa fa-times text-danger"></i>
+                                    <span ng-show="formApp.account.$error.required" ng-bind="'SYSTEM.ERROR.REQUIRED' | translate"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="roleGroupId" class="col-sm-4 required control-label" ng-bind="'LABEL.REQUEST_UPDATE.PLACE_HOLDER_ROLE' |translate"></label>
+                        <div class="col-sm-8">
+                            <sm-staff-account-type ng-model="ctrl.requestUpdate.staffAccountType" ng-required="true" sm-class="form-control input-sm"
+                                sm-input="true" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="roleGroupId" class="col-sm-2 required control-label" ng-bind="'LABEL.REQUEST_UPDATE.SENTMESSAGE' |translate"></label>
+                        <div class="col-sm-10">
+                            <textarea ng-model="ctrl.requestUpdate.message" type="text" class="form-control" id="content" name="content" placeholder="{{'LABEL.REQUEST_UPDATE.MESSAGE' | translate}}"
+                                rows="4" maxlength="2000" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        <div class="modal-footer">
+            <button ng-disabled="!formApp.$dirty || !formApp.$valid" type="submit" class="btn btn-primary">
+                <i ng-class="(ctrl.requestUpdate.residentId ? 'fa fa-edit' : 'fa fa-plus')"></i> {{ (ctrl.requestUpdate.residentId ? 'BUTTON.UPDATE' : 'BUTTON.CREATE') | translate }}</button>
+        </div>
+    </form>
+</sm-modal-dialog>

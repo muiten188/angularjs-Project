@@ -1,0 +1,171 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <h1>{{ 'MENU.SERVICE_REGISTRATION' | translate }}
+    <!-- <small>{{ 'MENU.SERVICE_REGISTRATION' | translate }}</small> -->
+  </h1>
+</section>
+<!-- Main content -->
+<section class="content">
+  <div class="box">
+    <div class="box-body no-padding">
+      <div class="form-search clearfix">
+        <div class="col-sm-10 search-controls">
+          <div class="row-no-padding">
+            <!-- <div class="form-group col-sm-2">
+                      <label class="sr-only">{{ 'LABEL.SERVICE_REGISTRATION.BUILDING' | translate }}</label>
+                      <div class="input-group">
+                        <div class="input-group-addon"><i class="fa fa-building" aria-hidden="true"></i></div>
+                        <input type="text" class="form-control input-sm" ng-model="ctrl.serviceRegistration.buildingCode" placeholder="{{ 'LABEL.SERVICE_REGISTRATION.BUILDING' | translate }}">
+                      </div>
+                    </div>
+                    <div class="form-group col-sm-2">
+                      <label class="sr-only">{{ 'LABEL.SERVICE_REGISTRATION.FLOOR' | translate }}</label>
+                      <div class="input-group">
+                        <div class="input-group-addon"><i class="fa fa-server" aria-hidden="true"></i></div>
+                        <input type="text" class="form-control input-sm" ng-model="ctrl.serviceRegistration.floorCode" placeholder="{{ 'LABEL.SERVICE_REGISTRATION.FLOOR' | translate }}">
+                      </div>
+                    </div> -->
+            <div class="form-group col-sm-2">
+              <label class="sr-only">{{ 'LABEL.SERVICE_REGISTRATION.APARTMENT' | translate }}</label>
+              <div class="input-group">
+                <div class="input-group-addon">
+                  <i class="fa fa-home" aria-hidden="true"></i>
+                </div>
+                <input type="text" class="form-control input-sm" ng-model="ctrl.serviceRegistration.apartmentName" placeholder="{{ 'LABEL.SERVICE_REGISTRATION.APARTMENT' | translate }}">
+              </div>
+            </div>
+            <div class="form-group col-sm-3">
+              <label class="sr-only">{{ 'LABEL.SERVICE_REGISTRATION.SERVICE' | translate }}</label>
+              <div class="input-group">
+                <div class="input-group-addon">
+                  <i class="fa fa-server" aria-hidden="true"></i>
+                </div>
+                <!-- <input type="text" class="form-control input-sm" ng-model="ctrl.serviceRegistration.serviceName" placeholder="{{ 'LABEL.SERVICE_REGISTRATION.SERVICE' | translate }}"> -->
+                <select ng-model="ctrl.serviceRegistration.serviceName" class="form-control input-sm">
+                  <option value>{{'LABEL.SERVICE_REGISTRATION.SERVICE' | translate}}</option>
+                  <option ng-repeat="option in ctrl.listService.data" value="{{option.serviceName}}">{{'LABEL.SERVICE_NAME.' + option.serviceName | translate}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group col-sm-3">
+              <label class="sr-only">{{ 'LABEL.SERVICE_REGISTRATION.STATUS' | translate }}</label>
+              <div class="input-group">
+                <div class="input-group-addon">
+                  <i class="fa fa-star" aria-hidden="true"></i>
+                </div>
+                <!-- <input type="text" class="form-control input-sm" ng-model="ctrl.serviceRegistration.status" placeholder="{{ 'LABEL.SERVICE_REGISTRATION.STATUS' | translate }}"> -->
+                <select ng-model="ctrl.serviceRegistration.status" class="form-control input-sm">
+                  <option value>{{'LABEL.SERVICE_REGISTRATION.STATUS' | translate}}</option>
+                  <option ng-repeat="option in ctrl.listStatus" value="{{option}}">{{option||translate}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group col-sm-2">
+              <label class="sr-only">{{ 'LABEL.SERVICE_REGISTRATION.REGISTERDATE' | translate }}</label>
+              <!-- <input type="text" class="form-control input-sm" ng-model="ctrl.serviceRegistration.dateRequest" placeholder="{{ 'LABEL.SERVICE_REGISTRATION.REGISTERDATE' | translate }}"> -->
+              <div class="input-group">
+                <input type="text" class="form-control input-sm" uib-datepicker-popup="dd/MM/yyyy" ng-model="ctrl.serviceRegistration.dateRequest"
+                  ng-required="false" close-text="Close" is-open="ctrl.dateRequestShow" />
+                <span class="input-group-addon" ng-click="ctrl.dateRequestShow = true">
+                  <i class="fa fa-calendar" aria-hidden="true"></i>
+                </span>
+              </div>
+            </div>
+            <div class="col-sm-2 search-controls">
+              <button type="submit" class="btn btn-primary btn-sm btn-search-small" ng-click="ctrl.onSearch({pageIndex: 1})">
+                <i class="fa fa-search"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-2 search-buttons">
+          <button type="submit" class="btn btn-primary btn-sm btn-search-large" ng-click="ctrl.onSearch({pageIndex: 1})">
+            <i class="fa fa-search"></i> Tìm kiếm
+          </button>
+          <button type="button" class="btn btn-danger btn-sm" ng-click="ctrl.onDeleteMulti()">
+            <i class="fa fa-trash"></i> {{ 'BUTTON.DELETE' | translate }}</button>
+          <button type="submit" class="btn btn-primary btn-sm" ng-click="ctrl.onCreate()">
+            <i class="fa fa-plus"></i> {{ 'BUTTON.CREATE' | translate }}</button>
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover" style="minheight:700px" st-table st-click="ctrl.onSearch(paging)">
+          <thead>
+            <tr>
+              <th class="text-center" style="width: 30px">
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" ng-click="ctrl.onCheckAll()" ng-model="ctrl.isCheckAll" />
+                    <span class="cr">
+                      <i class="cr-icon fa fa-check"></i>
+                    </span>
+                  </label>
+                </div>
+              </th>
+              <th>{{ 'LABEL.SERVICE_REGISTRATION.CODESERVICEREQUEST' | translate }}</th>
+              <th>{{ 'LABEL.SERVICE_REGISTRATION.BUILDING' | translate }}</th>
+              <th>{{ 'LABEL.SERVICE_REGISTRATION.FLOOR' | translate }}</th>
+              <th>{{ 'LABEL.SERVICE_REGISTRATION.APARTMENT' | translate }}</th>
+              <th>{{ 'LABEL.SERVICE_REGISTRATION.SERVICE' | translate }}</th>
+              <th>{{ 'LABEL.SERVICE_REGISTRATION.REGISTERDATE' | translate }}</th>
+              <th>{{ 'LABEL.SERVICE_REGISTRATION.STARTDATE' | translate }}</th>
+              <th>{{ 'LABEL.SERVICE_REGISTRATION.ENDDATE' | translate }}</th>
+              <th>{{ 'LABEL.SERVICE_REGISTRATION.STATUS' | translate }}</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="model in ctrl.datasource.data">
+              <td class="text-center">
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" ng-disabled="model.status!='PENDING'" ng-click="ctrl.onCheckItem(model.serviceRequestId)" ng-model="ctrl.checkBoxes[model.serviceRequestId]"
+                    />
+                    <span class="cr">
+                      <i class="cr-icon fa fa-check"></i>
+                    </span>
+                  </label>
+                </div>
+              </td>
+              <td>{{ model.serviceRequestId }}</td>
+              <td>{{ model.buildingCode }}</td>
+              <td>{{ model.floorCode }}</td>
+              <td>{{ model.apartmentName }}</td>
+              <td>{{ model.serviceName }}</td>
+              <td>{{ model.dateRequest | date : 'dd/MM/yyyy HH:mm:ss'}}</td>
+              <td>{{ model.dateStart| date : 'dd/MM/yyyy'}}</td>
+              <td>{{ model.dateEnd | date : 'dd/MM/yyyy'}}</td>
+              <td>{{ model.status }}</td>
+              <td class="text-center">
+                <button type="button" class="btn btn-primary btn-xs" ng-click="ctrl.onUpdate(model)">
+                  <i class="fa fa-edit"></i>
+                </button>
+                <button type="button" ng-disabled="model.status!='PENDING'" class="btn btn-danger btn-xs" ng-click="ctrl.onDelete(model)">
+                  <i class="fa fa-trash"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- /.box-body -->
+    <div class="box-footer clearfix">
+      <div class="col-md-4">
+        <sm-records count="ctrl.datasource.totalElement" />
+      </div>
+      <div class="col-md-4">
+        <ul uib-pagination boundary-links="true" ng-show="ctrl.datasource.totalElement > 0" ng-model="ctrl.currentPage" boundary-link-numbers="true"
+          max-size="5" ng-change="ctrl.onSearch({pageIndex: ctrl.currentPage})" total-items="ctrl.datasource.totalElement"
+          items-per-page="ctrl.datasource.pageSize" class="pagination pagination-sm no-margin" previous-text="&lsaquo;" next-text="&rsaquo;"
+          first-text="&laquo;" last-text="&raquo;"></ul>
+      </div>
+      <div class="col-md-4 text-right">
+        <sm-page-size ng-model="ctrl.serviceRegistration.pageSize" />
+      </div>
+    </div>
+  </div>
+  <!-- /.box -->
+</section>
+<!-- /.content -->

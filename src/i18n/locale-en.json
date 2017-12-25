@@ -1,0 +1,64 @@
+{
+    "LABEL": {
+        "COMMON": {
+            "SEARCH": "Search",
+            "CREATE": "Create",
+            "UPDATE": "Update",
+            "SAVE": "Save",
+            "DELETE": "Delete",
+            "PHONE_NUMBER": "Phone number",
+            "EMAIL": "Email",
+            "ADDRESS": "Address",
+            "CHARACTER": "character",
+            "SEARCH_DETAIL": "Detail searching",
+            "NOTICE": "Caution"
+        },
+        "USER": {
+            "PASSWORD": "Password",
+            "CONFIRM_PASSWORD": "Retype password",
+            "USER_NAME": "Username",
+            "FULL_NAME": "Fullname",
+            "SEARCH_DETAIL": "Fullname, username, email, phone number"
+        }
+    },
+    "BUTTON": {
+        "SEARCH": "Search",
+        "CREATE": "Create",
+        "UPDATE": "Update",
+        "SAVE": "Save",
+        "DELETE": "Delete",
+        "OK": "Ok",
+        "CANCEL": "Cancel"
+    },
+    "VALIDATION": {
+        "REQUIRED": "cannot be empty",
+        "MIN_LENGTH": "cannot be less than",
+        "MAX_LENGTH": "cannot be greater than"
+    },
+    "MESSAGE": {
+        "TEST_PARAMS": "Create {{name}} success",
+        "CREATE_USER_SUCCESS": "Create user success",
+        "CREATE_USER_FAIL": "Create user fail",
+        "UPDATE_USER_SUCCESS": "Update user success",
+        "UPDATE_USER_FAIL": "Update user fail",
+        "DELETE_USER_SUCCESS": "Delete user success",
+        "DELETE_USER_FAIL": "Delete user fail",
+        "LOGIN_USER_FAIL": "Username or password is incorrect"
+    },
+    "CONFIRM": {
+        "DELETE_USER": "Are you sure to delete user",
+        "DELETE_USERS": "Are you sure to delete all checked users"
+    },
+    "MENU": {
+        "BUILDING": "Quản lý tòa nhà",
+        "APARTMENT": "Quản lý căn hộ",
+        "GROUP": "Quản lý nhóm",
+        "RESIDENT": "Quản lý cư dân",
+        "SETTING": "Quản lý hệ thống",
+        "STAFF": "Quản lý nhân viên",
+        "USER": "Quản lý người dùng",
+        "ROLE_GROUP": "Quản lý vai trò",
+        "REQUEST_CHANGE": "Quản lý yêu cầu thay đổi",
+        "INFO":"Quản lý thông tin"
+    }
+}

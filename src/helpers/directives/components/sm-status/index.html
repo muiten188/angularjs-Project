@@ -1,0 +1,9 @@
+<span>
+    <select ng-show="smInput" ng-model="status" ng-class="smClass" ng-required="smRequired" ng-readonly="smReadonly">
+        <option value>-----{{'LABEL.COMMON.STATUS' | translate}}-----</option>
+        <option ng-repeat="option in options" value="{{option.value}}">{{option.title | translate}}</option>
+    </select>
+    <span ng-show="!smInput">
+        {{statusValue | translate}}
+    </span>
+</span>

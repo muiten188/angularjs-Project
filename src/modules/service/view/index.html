@@ -1,0 +1,125 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <h1>{{ 'MENU.SERVICE' | translate }}
+    <!-- <small>{{ 'MENU.SERVICE' | translate }}</small> -->
+  </h1>
+</section>
+<!-- Main content -->
+<section class="content">
+  <div class="box">
+    <div class="box-body table-responsive no-padding">
+      <div class="form-search clearfix">
+        <div class="col-sm-9 search-controls">
+          <div class="row-no-padding">
+            <div class="form-group col-sm-3">
+              <label class="sr-only">{{'LABEL.SERVICE.CODE' |translate}}</label>
+              <div class="input-group">
+                <div class="input-group-addon">
+                  <i class="fa fa-code" aria-hidden="true"></i>
+                </div>
+                <input type="text" class="form-control input-sm" ng-model="ctrl.service.serviceCode" placeholder="{{'LABEL.SERVICE.CODE' |translate}}">
+              </div>
+            </div>
+            <div class="form-group col-sm-3">
+              <label class="sr-only">{{'LABEL.SERVICE.SERVICE_TYPE' |translate}}</label>
+              <div class="input-group">
+                <div class="input-group-addon">
+                  <i class="fa fa-align-justify" aria-hidden="true"></i>
+                </div>
+                <sm-service-type ng-model="ctrl.service.serviceType" sm-class="form-control input-sm" sm-input="true" />
+              </div>
+            </div>
+            <div class="form-group col-sm-3">
+              <label class="sr-only">{{'LABEL.COMMON.STATUS' |translate}}</label>
+              <div class="input-group">
+                <div class="input-group-addon">
+                  <i class="fa fa-info" aria-hidden="true"></i>
+                </div>
+                <sm-status ng-model="ctrl.service.status" sm-class="form-control input-sm" sm-input="true" />
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-sm btn-search-small" ng-click="ctrl.onSearch({pageIndex: 1})">
+              <i class="fa fa-search"></i>
+            </button>
+          </div>
+        </div>
+        <div class="col-sm-3 search-buttons">
+          <button type="submit" class="btn btn-primary btn-sm btn-search-large" ng-click="ctrl.onSearch({pageIndex: 1})">
+            <i class="fa fa-search"></i> Tìm kiếm
+          </button>
+          <button type="button" class="btn btn-danger btn-sm" ng-click="ctrl.onDeleteMulti()">
+            <i class="fa fa-trash"></i> {{ 'BUTTON.DELETE' | translate }}</button>
+          <button type="submit" class="btn btn-primary btn-sm" ng-click="ctrl.onCreate()">
+            <i class="fa fa-plus"></i> {{ 'BUTTON.CREATE' | translate }}</button>
+        </div>
+      </div>
+
+      <table class="table table-bordered table-hover" st-table st-click="ctrl.onSearch(paging)">
+        <thead>
+          <tr>
+            <th class="text-center" style="width: 30px">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" ng-click="ctrl.onCheckAll()" ng-model="ctrl.isCheckAll" />
+                  <span class="cr">
+                    <i class="cr-icon fa fa-check"></i>
+                  </span>
+                </label>
+              </div>
+            </th>
+            <th>{{ 'LABEL.SERVICE.CODE' | translate }}</th>
+            <th>{{ 'LABEL.SERVICE.NAME' | translate }}</th>
+            <th>{{ 'LABEL.SERVICE.SERVICE_TYPE' | translate }}</th>
+            <th>{{ 'LABEL.SERVICE.INTRODUTION' | translate }}</th>
+            <th>{{ 'LABEL.SERVICE.STATUS' | translate }}</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="model in ctrl.datasource.data">
+            <td class="text-center">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" ng-click="ctrl.onCheckItem(model.serviceId)" ng-model="ctrl.checkBoxes[model.serviceId]" />
+                  <span class="cr">
+                    <i class="cr-icon fa fa-check"></i>
+                  </span>
+                </label>
+              </div>
+            </td>
+            <td>{{ model.serviceCode }}</td>
+            <td>{{ model.serviceName }}</td>
+            <td>{{ model.serviceType }}</td>
+            <td>{{ model.serviceIntroduction }}</td>
+            <td>{{ model.serviceStatus }}</td>
+            <td class="text-center">
+              <button type="button" class="btn btn-primary btn-xs" ng-click="ctrl.onUpdate(model)">
+                <i class="fa fa-edit"></i>
+              </button>
+              <button type="button" class="btn btn-danger btn-xs" ng-click="ctrl.onDelete(model)">
+                <i class="fa fa-trash"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- /.box-body -->
+    <div class="box-footer clearfix">
+      <div class="col-md-4">
+        <sm-records count="ctrl.datasource.totalElement" />
+      </div>
+      <div class="col-md-4">
+        <ul uib-pagination boundary-links="true" ng-show="ctrl.datasource.totalElement > 0" ng-model="ctrl.currentPage" boundary-link-numbers="true"
+          max-size="5" ng-change="ctrl.onSearch({pageIndex: ctrl.currentPage})" total-items="ctrl.datasource.totalElement"
+          items-per-page="ctrl.datasource.pageSize" class="pagination pagination-sm no-margin" previous-text="&lsaquo;" next-text="&rsaquo;"
+          first-text="&laquo;" last-text="&raquo;"></ul>
+      </div>
+      <div class="col-md-4 text-right">
+        <sm-page-size ng-model="ctrl.service.pageSize" />
+      </div>
+    </div>
+  </div>
+  <!-- /.box -->
+</section>
+<!-- /.content -->

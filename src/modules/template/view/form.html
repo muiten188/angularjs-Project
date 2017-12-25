@@ -1,0 +1,53 @@
+<sm-modal-dialog modal-title="{{(ctrl.template.templateId ? 'LABEL.COMMON.UPDATE' : 'LABEL.COMMON.CREATE') | translate }}"
+    type="{{ctrl.template.templateId ? 'update' : 'create'}}">
+    <form novalidate name="formApp" ng-submit="formApp.$valid && ctrl.onSubmit()">
+        <input ng-if="ctrl.template.templateId" type="hidden" ng-model="ctrl.template.templateId" />
+        <div class="modal-body">
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label for="templateGroup" class="control-label" ng-bind="'LABEL.TEMPLATE.TEMPLATE_GROUP' |translate"></label>
+                    <sm-template-group ng-model="ctrl.template.templateGroup" sm-class="form-control" sm-input="true" ng-disabled="true" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label for="templateName" class="control-label required" ng-bind="'LABEL.TEMPLATE.NAME' |translate"></label>
+                    <input ng-model="ctrl.template.templateName" type="text" class="form-control" id="templateName" name="templateName" placeholder="{{'LABEL.TEMPLATE.PLACE_HOLDER_NAME' | translate}}"
+                        maxlength="45" required />
+                    <div class="box-validate">
+                        <div ng-show="formApp.templateName.$dirty && formApp.templateName.$invalid" class="text-danger">
+                            <i class="fa fa-times text-danger"></i>
+                            <span ng-show="formApp.templateName.$error.required" ng-bind="'SYSTEM.ERROR.REQUIRED' | translate"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="templateTitle" class="control-label required" ng-bind="'LABEL.TEMPLATE.TITLE' |translate"></label>
+                <input ng-model="ctrl.template.templateTitle" type="text" class="form-control" id="templateTitle" name="templateTitle" placeholder="{{'LABEL.TEMPLATE.PLACE_HOLDER_TITLE' | translate}}"
+                    maxlength="160" required />
+                <div class="box-validate">
+                    <div ng-show="formApp.templateTitle.$dirty && formApp.templateTitle.$invalid" class="text-danger">
+                        <i class="fa fa-times text-danger"></i>
+                        <span ng-show="formApp.templateTitle.$error.required" ng-bind="'SYSTEM.ERROR.REQUIRED' | translate"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="templateContent" class="control-label required" ng-bind="'LABEL.TEMPLATE.CONTENT' |translate"></label>
+                <textarea ng-model="ctrl.template.templateContent" type="text" class="form-control" id="templateContent" name="templateContent"
+                    placeholder="{{'LABEL.TEMPLATE.PLACE_HOLDER_CONTENT' | translate}}" rows="5" maxlength="2000" required />
+                <div class="box-validate">
+                    <div ng-show="formApp.templateContent.$dirty && formApp.templateContent.$invalid" class="text-danger">
+                        <i class="fa fa-times text-danger"></i>
+                        <span ng-show="formApp.templateContent.$error.required" ng-bind="'SYSTEM.ERROR.REQUIRED' | translate"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button ng-disabled="!formApp.$dirty || !formApp.$valid || ctrl.template.templateGroup==='SYSTEM'" type="submit" class="btn btn-primary">
+                <i ng-class="(ctrl.template.templateId ? 'fa fa-edit' : 'fa fa-plus')"></i> {{ (ctrl.template.templateId ? 'BUTTON.UPDATE' : 'BUTTON.CREATE') | translate }}</button>
+        </div>
+    </form>
+</sm-modal-dialog>

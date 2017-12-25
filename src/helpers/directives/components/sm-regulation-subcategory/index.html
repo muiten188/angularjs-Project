@@ -1,0 +1,9 @@
+<span>
+    <select ng-show="smInput" ng-model="regulationSubCategory" ng-class="smClass" ng-required="smRequired" ng-readonly="smReadonly">
+      <option value>-----{{'LABEL.REGULATION_SUBCATEGORY.TITLE' | translate}}-----</option>
+      <option ng-repeat="option in options" value="{{option.value}}">{{option.title | translate}}</option>
+    </select>
+    <span ng-show="!smInput">
+      {{regulationSubCategoryValue | translate}}
+    </span>
+  </span>

@@ -1,0 +1,114 @@
+<sm-modal-dialog modal-title="{{'LABEL.COMMON.UPDATE' | translate }}" type="update">
+    <form novalidate name="formApp" class="form-horizontal" ng-submit="formApp.$valid && ctrl.onSubmit()">
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="serviceCode" class="col-sm-3 control-label required" ng-bind="'LABEL.SERVICE.CODE' |translate"></label>
+                <div class="col-sm-9">
+                    <input ng-model="ctrl.service.serviceCode" type="text" class="form-control" name="serviceCode" placeholder="{{'LABEL.SERVICE.PLACE_HOLDER_CODE' | translate}}"
+                        maxlength="45" required readonly />
+                    <div class="box-validate">
+                        <div ng-show="formApp.serviceCode.$dirty && formApp.serviceCode.$invalid" class="text-danger">
+                            <i class="fa fa-times text-danger"></i>
+                            <span ng-show="formApp.serviceCode.$error.required" ng-bind="'SYSTEM.ERROR.REQUIRED' | translate"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="serviceName" class="col-sm-3 control-label required" ng-bind="'LABEL.SERVICE.NAME' |translate"></label>
+                <div class="col-sm-9">
+                    <input ng-model="ctrl.service.serviceName" type="text" class="form-control" name="serviceName" placeholder="{{'LABEL.SERVICE.PLACE_HOLDER_NAME' | translate}}"
+                        maxlength="45" required />
+                    <div class="box-validate">
+                        <div ng-show="formApp.serviceName.$dirty && formApp.serviceName.$invalid" class="text-danger">
+                            <i class="fa fa-times text-danger"></i>
+                            <span ng-show="formApp.serviceName.$error.required" ng-bind="'SYSTEM.ERROR.REQUIRED' | translate"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="form-group">
+                <label for="code" class="col-sm-3 control-label" ng-bind="'LABEL.SERVICE.SERVICE_TYPE' |translate"></label>
+                <div class="col-sm-9">
+                    <sm-service-type ng-model="ctrl.service.serviceType" sm-class="form-control" sm-input="true" />
+                </div>
+            </div> -->
+            <div class="form-group">
+                <label for="serviceIntroduction" class="col-sm-3 control-label" ng-bind="'LABEL.SERVICE.INTRODUTION' |translate"></label>
+                <div class="col-sm-9">
+                    <textarea ng-model="ctrl.service.serviceIntroduction" type="text" class="form-control" id="serviceIntroduction" name="serviceIntroduction"
+                        placeholder="{{'LABEL.SERVICE.PLACE_HOLDER_INTRODUTION' | translate}}" rows="3" maxlength="2000" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="serviceStatus" class="col-sm-3 control-label" ng-bind="'LABEL.SERVICE.STATUS' |translate"></label>
+                <div class="col-sm-9">
+                    <sm-status ng-model="ctrl.service.serviceStatus" sm-class="form-control" sm-input="true" />
+                </div>
+            </div>
+            <table class="table table-stripped table-hover header-fixed">
+                <thead>
+                    <tr>
+                        <th class="col4">{{ 'LABEL.TARIFF.NAME' | translate }}</th>
+                        <th class="col4">{{ 'LABEL.TARIFF.VALUE' | translate }}</th>
+                        <th class="col4">{{ 'LABEL.TARIFF.DEFAULT_VALUE' | translate }}</th>
+                        <th class="col4 text-center">&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody style="max-height: 200px">
+                    <tr ng-repeat="tariff in ctrl.listTariff">
+                        <td class="col4">
+                            <input type="hidden" ng-model="tariff.tariffId" />
+                            <input type="text" ng-model="tariff.tariffName" ng-show="tariff.editting" />
+                            <span ng-show="!tariff.editting">{{tariff.tariffName}}</span>
+                        </td>
+                        <td class="col4">
+                            <input type="text" ng-model="tariff.tariffValue" ng-show="tariff.editting" />
+                            <span ng-show="!tariff.editting">{{tariff.tariffValue}}</span>
+                        </td>
+                        <td class="col4">
+                            <input ng-show="tariff.editting" type="checkbox" ng-model="tariff.defaultValue" ng-true-value="'YES'" ng-false-value="'NO'">
+                            <sm-yes-no ng-show="!tariff.editting" ng-value="tariff.defaultValue" />
+                        </td>
+                        <td class="col4 text-center" class="text-center">
+                            <button type="button" class="btn btn-xs" ng-show="tariff.editting" ng-click="tariff.editting=false">
+                                <i class="fa fa-times" aria-hidden="true"></i>
+                            </button>
+                            <button type="button" class="btn btn-primary btn-xs" ng-click="ctrl.onUpdateTariff(tariff)">
+                                <i ng-class="tariff.editting ? 'fa fa-check' : 'fa fa-edit'"></i>
+                            </button>
+                            <button type="button" class="btn btn-danger btn-xs" ng-click="ctrl.onDeleteTariff(tariff)">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td class="col4">
+                            <input type="text" class="form-control input-sm" ng-model="ctrl.tariff.tariffName" placeholder="{{'LABEL.TARIFF.NAME' |translate}}"
+                            />
+                        </td>
+                        <td class="col4">
+                            <input type="number" class="form-control input-sm" ng-model="ctrl.tariff.tariffValue" placeholder="{{'LABEL.TARIFF.VALUE' |translate}}"
+                            />
+                        </td>
+                        <td class="col4">
+                            <input type="checkbox" ng-model="ctrl.tariff.defaultValue" ng-true-value="'YES'" ng-false-value="'NO'">
+                        </td>
+                        <td class="col4 text-center" class="text-center">
+                            <button type="button" class="btn btn-primary btn-xs" ng-click="ctrl.onCreateTariff()">
+                                <i class="fa fa-plus"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+
+        </div>
+        <div class="modal-footer">
+            <button ng-disabled="!formApp.$dirty || !formApp.$valid" type="submit" class="btn btn-primary">
+                <i class="fa fa-edit"></i> {{ 'BUTTON.UPDATE' | translate }}</button>
+        </div>
+    </form>
+</sm-modal-dialog>

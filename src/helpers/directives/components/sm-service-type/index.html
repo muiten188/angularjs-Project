@@ -1,0 +1,9 @@
+<span>
+  <select ng-show="smInput" ng-model="serviceType" ng-class="smClass" ng-required="smRequired" ng-readonly="smReadonly">
+    <option value>-----{{'LABEL.SERVICE.SERVICE_TYPE' | translate}}-----</option>
+    <option ng-repeat="option in options" value="{{option.value}}">{{option.title | translate}}</option>
+  </select>
+  <span ng-show="!smInput">
+    {{serviceTypeValue | translate}}
+  </span>
+</span>

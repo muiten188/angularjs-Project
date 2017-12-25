@@ -1,0 +1,256 @@
+<sm-modal-dialog modal-title="{{'LABEL.SERVICE.ADDNEWREQUEST'| translate }}" type="update">
+    <form novalidate name="formApp" class="form-horizontal" ng-submit="formApp.$valid && ctrl.onSubmit()">
+        <!-- <input type="hidden" ng-model="ctrl.building.buildingId" /> -->
+        <div class="modal-body">
+            <!-- hộ dân cư -->
+            <div class="row form-group">
+                <label for="address" class="no-padding-left-right col-sm-2 control-label" ng-bind="'LABEL.SERVICE.RESIDENT' |translate"></label>
+                <div class="col-sm-3">
+                    <input ng-model="ctrl.building.address" type="text" class="form-control" name="address" placeholder="{{'LABEL.SERVICE.BUILDING' | translate}}"
+                        maxlength="255" />
+                </div>
+                <div class="col-sm-3">
+                    <input ng-model="ctrl.building.address" type="number" min="0" max="999" class="form-control" name="address" placeholder="{{'LABEL.SERVICE.FLOOR' | translate}}"
+                        maxlength="255" />
+                </div>
+                <div class="col-sm-4">
+                    <input ng-model="ctrl.building.address" type="text" class="form-control" name="address" placeholder="{{'LABEL.SERVICE.APARTMENT' | translate}}"
+                        maxlength="255" />
+                </div>
+            </div>
+            <!-- người đăng ký -->
+            <div class="row form-group">
+                <label for="address" class="no-padding-left-right col-sm-2 control-label" ng-bind="'LABEL.SERVICE.REGISTER' |translate"></label>
+                <div class="col-sm-4">
+                    <select ng-model="ctrl.apartment.floorId" id="floorId" class="form-control" to-number required>
+                        <option ng-repeat="option in ctrl.listFloor" value="{{option.floorId}}">{{option.code}}</option>
+                    </select>
+                </div>
+                <label for="address" class="no-padding-left-right col-sm-2 control-label" ng-bind="'LABEL.SERVICE.REGISTERTYPE' |translate"></label>
+                <div class="col-sm-4">
+                    <select ng-model="ctrl.apartment.floorId" id="floorId" class="form-control" to-number required>
+                        <option ng-repeat="option in ctrl.listFloor" value="{{option.floorId}}">{{option.code}}</option>
+                    </select>
+                </div>
+            </div>
+            <!-- dịch vụ biểu phí -->
+            <div class="row form-group">
+                <label for="address" class="no-padding-left-right col-sm-2 control-label" ng-bind="'LABEL.SERVICE.SERVICE' |translate"></label>
+                <div class="col-sm-4">
+                    <select ng-model="ctrl.apartment.floorId" id="floorId" class="form-control" to-number required>
+                        <option ng-repeat="option in ctrl.listFloor" value="{{option.floorId}}">{{option.code}}</option>
+                    </select>
+                </div>
+                <label for="address" class="no-padding-left-right col-sm-2 control-label" ng-bind="'LABEL.SERVICE.FEEBILL' |translate"></label>
+                <div class="col-sm-4">
+                    <select ng-model="ctrl.apartment.floorId" id="floorId" class="form-control" to-number required>
+                        <option ng-repeat="option in ctrl.listFloor" value="{{option.floorId}}">{{option.code}}</option>
+                    </select>
+                </div>
+            </div>
+            <!-- Đăng ký xe -->
+            <div class="flex-container form-group">
+                <label for="address" class="label-padding control-label" ng-bind="'LABEL.SERVICE.BIKEREGISTER' |translate"></label>
+                <ul class="list-inline fill-flex" style="padding-top:8px">
+                    <li class="list-inline-item">
+                        <a href="#">DKX01.jpg &nbsp
+                            <i class="fa fa-plus-square" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- chứng minh thư hộ chiếu -->
+            <div class="flex-container form-group">
+                <label for="address" class="label-padding control-label" ng-bind="'LABEL.SERVICE.ID_PARTPOST' |translate"></label>
+                <ul class="list-inline fill-flex" style="padding-top:8px">
+                    <li class="list-inline-item">
+                        <a href="#">
+                            <i class="fa fa-plus-square" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="flex-container form-group">
+                <label for="address" class="label-padding control-label" ng-bind="'LABEL.SERVICE.HAPU_CONTRACT' |translate"></label>
+                <ul class="list-inline fill-flex" style="padding-top:8px">
+                    <li class="list-inline-item">
+                        <a href="#">
+                            <i class="fa fa-plus-square" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- hợp đồng thuê nhà -->
+            <div class="flex-container form-group">
+                <label for="address" class="label-padding control-label" ng-bind="'LABEL.SERVICE.RENTHOUSE_CONTRACT' |translate"></label>
+                <ul class="list-inline  fill-flex">
+                    <li class="list-inline-item">
+                        <a href="#">HDTN01.jpg</a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="#">HDTN01.jpg</a>
+                        <i class="fa fa-plus-square" aria-hidden="true"></i>
+                    </li>
+                </ul>
+            </div>
+            <!-- giấy tạm trú -->
+            <div class="flex-container form-group">
+                <label for="address" class="label-padding control-label" ng-bind="'LABEL.SERVICE.TEMPORARYREGISTRAION' |translate"></label>
+                <ul class="list-inline fill-flex">
+                    <li class="list-inline-item">
+                        <a href="#">
+                            <i class="fa fa-plus-square" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- hộ khẩu giấy kết hôn -->
+            <div class="flex-container form-group">
+                <label for="address" class="label-padding control-label" ng-bind="'LABEL.SERVICE.HOUSEHOLD_MARRIED' |translate"></label>
+                <ul class="list-inline fill-flex">
+                    <li class="list-inline-item">
+                        <a href="#">
+                            <i class="fa fa-plus-square" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- hợp đồng mua bán xe -->
+            <div class="flex-container form-group">
+                <label for="address" class="label-padding  control-label" ng-bind="'LABEL.SERVICE.CARPURCHASECONTRACT' |translate"></label>
+                <ul class="list-inline fill-flex">
+                    <li class="list-inline-item">
+                        <a href="#">
+                            <i class="fa fa-plus-square" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- mẫu giấy tờ hapulico -->
+            <div class="flex-container form-group">
+                <label for="address" class="label-padding control-label" ng-bind="'LABEL.SERVICE.HAPULICOPAPER' |translate"></label>
+                <ul class="list-inline fill-flex">
+                    <li class="list-inline-item">
+                        <a href="#">Mau01.jpg</a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="#">Mau02.jpg</a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="#">Mau03.jpg</a>
+                        <i class="fa fa-plus-square" aria-hidden="true"></i>
+                    </li>
+                </ul>
+            </div>
+            <div class="row form-group">
+                <div class="form-check col-sm-12">
+                    <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input"> {{'LABEL.SERVICE.UNMANNEDCAR' |translate}}
+                    </label>
+                </div>
+                <div class="form-check col-sm-12">
+                    <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input"> {{'LABEL.SERVICE.BUSINESSREGISTRAION' |translate}}
+                    </label>
+                </div>
+            </div>
+            <div class="row form-group">
+                <label for="address" class="no-padding-left-right col-sm-2 control-label" required ng-bind="'LABEL.SERVICE.VEHICLEOWNER' |translate"></label>
+                <div class="col-sm-3">
+                    <input ng-model="ctrl.building.address" type="text" class="form-control" name="address" placeholder="{{'LABEL.SERVICE.FIRSTNAME' | translate}}"
+                        maxlength="255" />
+                </div>
+                <div class="col-sm-2">
+                    <input ng-model="ctrl.building.address" type="text" class="form-control" name="address" placeholder="{{'LABEL.SERVICE.NAME' | translate}}"
+                        maxlength="255" />
+                </div>
+            </div>
+            <!-- biển kiểm soát hãng xe -->
+            <div class="row form-group">
+                <label for="address" class="no-padding-left-right col-sm-2 control-label" required ng-bind="'LABEL.SERVICE.CARNUMBERPLATES' |translate"></label>
+                <div class="col-sm-4">
+                    <input ng-model="ctrl.building.address" type="text" class="form-control" name="address" placeholder="{{'LABEL.SERVICE.CARNUMBERPLATES' | translate}}"
+                        maxlength="255" />
+                </div>
+                <label for="address" class="col-sm-2 control-label" ng-bind="'LABEL.SERVICE.AUTOMAKER' |translate"></label>
+                <div class="col-sm-4 no-margin">
+                    <input ng-model="ctrl.building.address" type="text" class="form-control" name="address" placeholder="{{'LABEL.SERVICE.AUTOMAKER' | translate}}"
+                        maxlength="255" />
+                </div>
+            </div>
+            <!-- mẫu xe -->
+            <div class="row form-group">
+                <label for="address" class="no-padding-left-right col-sm-2 control-label" required ng-bind="'LABEL.SERVICE.CARMODEL' |translate"></label>
+                <div class="col-sm-4">
+                    <input ng-model="ctrl.building.address" type="text" class="form-control" name="address" placeholder="{{'LABEL.SERVICE.CARMODEL' | translate}}"
+                        maxlength="255" />
+                </div>
+                <label for="address" class="col-sm-2 control-label" ng-bind="'LABEL.SERVICE.CARCOLOR' |translate"></label>
+                <div class="col-sm-4 no-margin">
+                    <input ng-model="ctrl.building.address" type="text" class="form-control" name="address" placeholder="{{'LABEL.SERVICE.CARCOLOR' | translate}}"
+                        maxlength="255" />
+                </div>
+            </div>
+            <!-- ngày bắt đầu ngày kết thúc -->
+            <div class="row form-group">
+                <label for="address" class="no-padding-left-right col-sm-2 control-label" required ng-bind="'LABEL.SERVICE.STARTDATE' |translate"></label>
+                <div class="col-sm-4">
+                    <input ng-model="ctrl.building.address" type="date" class="form-control" name="address" placeholder="{{'LABEL.SERVICE.STARTDATE' | translate}}"
+                        maxlength="255" />
+                </div>
+                <label for="address" class="no-padding-left-right col-sm-2 control-label" ng-bind="'LABEL.SERVICE.ENDDATE' |translate"></label>
+                <div class="col-sm-4 no-margin">
+                    <input ng-model="ctrl.building.address" type="date" class="form-control" name="address" placeholder="{{'LABEL.SERVICE.ENDDATE' | translate}}"
+                        maxlength="255" />
+                </div>
+            </div>
+            <!-- mã số thẻ -->
+            <div class="row form-group">
+                <label for="address" class="no-padding-left-right col-sm-2 control-label" required ng-bind="'LABEL.SERVICE.CARDID' |translate"></label>
+                <div class="col-sm-4">
+                    <input type="text" disabled class="form-control" name="address" placeholder="{{'LABEL.SERVICE.CARDID' | translate}}" maxlength="255"
+                    />
+                </div>
+            </div>
+            <!-- vị trí đỗ -->
+            <div class="row form-group">
+                <label for="address" class="no-padding-left-right col-sm-2 control-label" required ng-bind="'LABEL.SERVICE.LOCATIONPARKING' |translate"></label>
+                <div class="col-sm-4">
+                    <input type="text" disabled class="form-control" name="address" placeholder="{{'LABEL.SERVICE.LOCATIONPARKING' | translate}}"
+                        maxlength="255" />
+                </div>
+            </div>
+            <!-- mẫu thông báo -->
+            <div class="row form-group">
+                <label for="address" class="no-padding-left-right col-sm-2 control-label" required ng-bind="'LABEL.SERVICE.STARTDATE' |translate"></label>
+                <div class="col-sm-10">
+                    <select ng-model="ctrl.apartment.floorId" id="floorId" class="form-control" to-number required>
+                        <option ng-repeat="option in ctrl.listFloor" value="{{option.floorId}}">{{option.code}}</option>
+                    </select>
+                </div>
+            </div>
+            <!-- tiêu đề -->
+            <div class="row form-group">
+                <label for="address" class="no-padding-left-right col-sm-2 control-label" required ng-bind="'LABEL.SERVICE.TITLE' |translate"></label>
+                <div class="col-sm-4">
+                    <input ng-model="ctrl.building.address" type="date" class="form-control" name="address" placeholder="{{'LABEL.SERVICE.TITLE' | translate}}"
+                        maxlength="255" />
+                </div>
+            </div>
+            <!-- nội dung -->
+            <div class="row form-group">
+                <label for="address" class="no-padding-left-right col-sm-2 control-label" required ng-bind="'LABEL.SERVICE.CONTENT' |translate"></label>
+                <div class="col-sm-10">
+                    <textarea class="form-control textarea-nonresize" rows="3" id="comment" placeholder="{{'LABEL.SERVICE.CONTENT' | translate}}"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button ng-disabled="!formApp.$dirty || !formApp.$valid" type="submit" class="btn btn-primary">
+                <i ng-class="'fa fa-edit'"></i> {{ 'BUTTON.SAVE' | translate }}</button>
+            <button ng-disabled="!formApp.$dirty || !formApp.$valid" type="submit" class="btn btn-primary">
+                <i ng-class="'fa fa-edit'"></i> {{ 'BUTTON.APPROVE' | translate }}</button>
+        </div>
+    </form>
+</sm-modal-dialog>

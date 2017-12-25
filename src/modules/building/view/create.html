@@ -1,0 +1,44 @@
+<sm-modal-dialog modal-title="{{'LABEL.COMMON.CREATE' | translate }}" type="create">
+    <form novalidate name="formApp" class="form-horizontal" ng-submit="formApp.$valid && ctrl.onSubmit()">
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="code" class="col-sm-3 control-label required" ng-bind="'LABEL.BUILDING.CODE' |translate"></label>
+                <div class="col-sm-9">
+                    <input ng-model="ctrl.building.code" type="text" class="form-control" name="code" placeholder="{{'LABEL.BUILDING.PLACE_HOLDER_CODE' | translate}}"
+                        maxlength="45" required />
+                    <div class="box-validate">
+                        <div ng-show="formApp.code.$dirty && formApp.code.$invalid" class="text-danger">
+                            <i class="fa fa-times text-danger"></i>
+                            <span ng-show="formApp.code.$error.required" ng-bind="'SYSTEM.ERROR.REQUIRED' | translate"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="address" class="col-sm-3 control-label" ng-bind="'LABEL.BUILDING.ADDRESS' |translate"></label>
+                <div class="col-sm-9">
+                    <input ng-model="ctrl.building.address" type="text" class="form-control" name="address" placeholder="{{'LABEL.BUILDING.PLACE_HOLDER_ADDRESS' | translate}}"
+                        maxlength="255" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="description" class="col-sm-3 control-label" ng-bind="'LABEL.BUILDING.DESCRIPTION' |translate"></label>
+                <div class="col-sm-9">
+                    <input ng-model="ctrl.building.description" type="text" class="form-control" name="description" placeholder="{{'LABEL.BUILDING.PLACE_HOLDER_DESCRIPTION' | translate}}"
+                        maxlength="255" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="numberFloor" class="col-sm-3 control-label" ng-bind="'LABEL.BUILDING.NUMBER_FLOOR' |translate"></label>
+                <div class="col-sm-9">
+                    <input ng-model="ctrl.building.numberFloor" type="number" class="form-control" name="numberFloor" placeholder="{{'LABEL.BUILDING.PLACE_HOLDER_NUMBER_FLOOR' | translate}}"
+                        min="0" max="999" required ng-readonly="ctrl.building.buildingId" />
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button ng-disabled="!formApp.$dirty || !formApp.$valid" type="submit" class="btn btn-primary">
+                <i ng-class="(ctrl.building.buildingId ? 'fa fa-edit' : 'fa fa-plus')"></i> {{ (ctrl.building.buildingId ? 'BUTTON.UPDATE' : 'BUTTON.CREATE') | translate }}</button>
+        </div>
+    </form>
+</sm-modal-dialog>

@@ -1,0 +1,10 @@
+<span>
+  <select ng-show="smInput" ng-model="templateGroup" ng-class="smClass" 
+    ng-required="smRequired" ng-readonly="smReadonly" ng-disabled="smDisabled">
+    <option value>-----{{'LABEL.TEMPLATE.TEMPLATE_GROUP' | translate}}-----</option>
+    <option ng-repeat="option in options" value="{{option.value}}">{{option.title | translate}}</option>
+  </select>
+  <span ng-show="!smInput">
+    {{templateGroupValue | translate}}
+  </span>
+</span>

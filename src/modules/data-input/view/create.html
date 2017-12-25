@@ -1,0 +1,121 @@
+<sm-modal-dialog modal-title="{{'LABEL.DATA_INPUT.ADDNEWBILL'| translate }}" type="update">
+    <form name="formApp" class="form-horizontal" ng-submit="formApp.$valid && ctrl.onSubmit()">
+        <!-- <input type="hidden" ng-model="ctrl.building.buildingId" /> -->
+        <div class="modal-body">
+            <!-- tòa nhà -->
+            <div class="row form-group">
+                <label for="buildingId" class=" col-sm-3 required control-label" ng-bind="'LABEL.DATA_INPUT.BUILDING' |translate"></label>
+                <div class="col-sm-8">
+                    <select ng-model="ctrl.data.buildingId" name="buildingId" id="buildingId" required class="form-control" ng-change="ctrl.onBuildingChange()">
+                        <option ng-repeat="option in ctrl.listBuilding" value="{{option.buildingId}}">{{option.code}}</option>
+                    </select>
+                    <div class="box-validate">
+                        <div ng-show="formApp.buildingId.$dirty && formApp.buildingId.$invalid" class="text-danger">
+                            <i class="fa fa-times text-danger"></i>
+                            <span ng-show="formApp.buildingId.$error.required" ng-bind="'SYSTEM.ERROR.REQUIRED' | translate"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- tầng -->
+            <div class="row form-group">
+                <label for="floorId" class=" col-sm-3 required control-label" ng-bind="'LABEL.DATA_INPUT.FLOOR' |translate"></label>
+                <div class="col-sm-8">
+                    <select ng-model="ctrl.data.floorId" id="floorId" name="floorId" required class="form-control" ng-change="ctrl.onFloorChange()">
+                        <option ng-repeat="option in ctrl.listFloor" value="{{option.floorId}}">{{option.code}}</option>
+                    </select>
+                    <div class="box-validate">
+                        <div ng-show="formApp.floorId.$dirty && formApp.floorId.$invalid" class="text-danger">
+                            <i class="fa fa-times text-danger"></i>
+                            <span ng-show="formApp.floorId.$error.required" ng-bind="'SYSTEM.ERROR.REQUIRED' | translate"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- căn hộ -->
+            <div class="row form-group">
+                <label for="apartmentId" class=" col-sm-3 required control-label" ng-bind="'LABEL.DATA_INPUT.APARTMENT' |translate"></label>
+                <div class="col-sm-8">
+                    <select ng-model="ctrl.data.apartmentId" id="apartmentId" required name="apartmentId" class="form-control">
+                        <option ng-repeat="option in ctrl.listApartment" value="{{option.apartmentId}}">{{option.name}}</option>
+                    </select>
+                    <div class="box-validate">
+                        <div ng-show="formApp.apartmentId.$dirty && formApp.apartmentId.$invalid" class="text-danger">
+                            <i class="fa fa-times text-danger"></i>
+                            <span ng-show="formApp.apartmentId.$error.required" ng-bind="'SYSTEM.ERROR.REQUIRED' | translate"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- dịch vụ -->
+            <div class="row form-group">
+                <label for="serviceId" class=" col-sm-3 required control-label" ng-bind="'LABEL.DATA_INPUT.SERVICE' |translate"></label>
+                <div class="col-sm-8">
+                    <select ng-model="ctrl.data.serviceId" id="serviceId" required name="serviceId" class="form-control" ng-change="ctrl.onServiceChange()">
+                        <option ng-repeat="option in ctrl.listService.data" value="{{option.serviceId}}">{{option.serviceName}}</option>
+                    </select>
+                    <div class="box-validate">
+                        <div ng-show="formApp.serviceId.$dirty && formApp.serviceId.$invalid" class="text-danger">
+                            <i class="fa fa-times text-danger"></i>
+                            <span ng-show="formApp.serviceId.$error.required" ng-bind="'SYSTEM.ERROR.REQUIRED' | translate"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+             <!-- tháng -->
+             <div class="row form-group">
+                <label for="month" class=" col-sm-3 required control-label" ng-bind="'LABEL.DATA_INPUT.MONTH' |translate"></label>
+                <div class="col-sm-8">
+                    <!-- <select ng-model="ctrl.data.month" id="month" required class="form-control"  name="month">
+                        <option value="" disabled selected>{{'LABEL.DATA_INPUT.MONTH' |translate}}</option>
+                        <option ng-repeat="option in ctrl.listMonth" value="{{option}}">{{option}}</option>
+                    </select> -->
+                    <input ng-model="ctrl.data.month" id="month" required type="text" name="month" class="form-control" placeholder="{{'LABEL.DATA_INPUT.MONTH' | translate}}"
+                    value="2018-01"/>
+                    <div class="box-validate">
+                        <div ng-show="formApp.month.$dirty && formApp.month.$invalid" class="text-danger">
+                            <i class="fa fa-times text-danger"></i>
+                            <span ng-show="formApp.month.$error.required" ng-bind="'SYSTEM.ERROR.REQUIRED' | translate"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- chỉ số đầu-->
+            <div class="row form-group">
+                <label for="paramFirst" class=" col-sm-3 control-label" ng-bind="'LABEL.DATA_INPUT.STARTNUMBER' |translate"></label>
+                <div class="col-sm-8">
+                    <input ng-model="ctrl.data.paramFirst" ng-change='ctrl.onParamChange()' ng-disabled="ctrl.data.serviceName=='Nước'||ctrl.data.serviceName=='nước'||ctrl.data.serviceName=='WATER'" id="paramFirst" type="number" name="paramFirst" class="form-control" placeholder="{{'LABEL.DATA_INPUT.STARTNUMBER' | translate}}"
+                    value=0 />
+                </div>
+            </div>
+             <!-- chỉ số cuối-->
+             <div class="row form-group">
+                <label for="paramLast" class=" col-sm-3 control-label" ng-bind="'LABEL.DATA_INPUT.ENDNUMBER' |translate"></label>
+                <div class="col-sm-8">
+                    <input ng-model="ctrl.data.paramLast" ng-change='ctrl.onParamChange()' ng-disabled="ctrl.data.serviceName=='Nước'||ctrl.data.serviceName=='nước'||ctrl.data.serviceName=='WATER'" id="paramLast" type="number" name="paramLast" class="form-control" name="address" placeholder="{{'LABEL.DATA_INPUT.ENDNUMBER' | translate}}"
+                    value=0 />
+                </div>
+            </div>
+            <!-- giá trị tổng-->
+            <div class="row form-group">
+                <label for="paramTotal" class=" col-sm-3 control-label" ng-bind="'LABEL.DATA_INPUT.TOTALNUMBER' |translate"></label>
+                <div class="col-sm-8">
+                    <input ng-model="ctrl.data.paramTotal" id="paramTotal" ng-disabled="ctrl.data.serviceName=='Điện'||ctrl.data.serviceName=='điện'||ctrl.data.serviceName=='ELECTRIC'" type="number" name="paramTotal" class="form-control" name="address" placeholder="{{'LABEL.DATA_INPUT.TOTALNUMBER' | translate}}"
+                    maxlength="255" />
+                </div>
+            </div>
+            <!-- giá trị-->
+            <div class="row form-group">
+                <label for="amount" class=" col-sm-3 control-label" ng-bind="'LABEL.DATA_INPUT.VALUE' |translate"></label>
+                <div class="col-sm-8">
+                    <input ng-model="ctrl.data.amount" id="amount" type="number" name="amount" class="form-control" name="address" placeholder="{{'LABEL.DATA_INPUT.VALUE' | translate}}"
+                    maxlength="255" />
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button ng-disabled="!formApp.$dirty || !formApp.$valid" type="submit" class="btn btn-primary">
+                <i ng-class="'fa fa-edit'"></i> {{ 'BUTTON.CREATE' | translate }}</button>
+        </div>
+    </form>
+</sm-modal-dialog>

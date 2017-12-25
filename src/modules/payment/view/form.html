@@ -1,0 +1,112 @@
+<sm-modal-dialog modal-title="{{(ctrl.invoice.invoiceId ? 'LABEL.COMMON.UPDATE' : 'LABEL.COMMON.CREATE') | translate }}"
+    type="{{ctrl.invoice.invoiceId ? 'update' : 'create'}}">
+    <form novalidate name="formApp" ng-submit="formApp.$valid && ctrl.onSubmit()" class="form-horizontal">
+        <input ng-if="ctrl.invoice.invoiceId" type="hidden" ng-model="ctrl.invoice.invoiceId" />
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group ">
+                        <label for="apartmentList" class="control-label col-sm-5">{{ 'LABEL.COMMON.APARTMENT' | translate }}</label>
+                        <div class="col-sm-7">
+                            <ui-select ng-model="ctrl.apartment" theme="bootstrap" close-on-select="true" title="{{ 'LABEL.COMMON.APARTMENT' | translate }}"
+                                on-select="ctrl.getInvoiceCode()">
+                                <ui-select-match placeholder="{{ 'LABEL.COMMON.APARTMENT' | translate }}">{{$select.selected.name}}</ui-select-match>
+                                <ui-select-choices refresh="ctrl.refreshApartments($select.search)" refresh-delay="0" repeat="item in ctrl.availableApartments">
+                                    {{item.name}}
+                                </ui-select-choices>
+                            </ui-select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="monthDate" class="control-label col-sm-5" ng-bind="'LABEL.COMMON.MONTH' |translate"></label>
+                        <div class="col-sm-7">
+                            <div class="input-group">
+                                <input type="text" class="form-control" uib-datepicker-popup="MM/yyyy" ng-model="ctrl.monthDate" ng-required="false" ng-change="ctrl.getInvoiceCode()"
+                                    name="monthDate" id="monthDate" close-text="Close" is-open="ctrl.invoice.show" />
+                                <span class="input-group-addon" ng-click="ctrl.invoice.show = true">
+                                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="invoiceId" class="control-label col-sm-5" ng-bind="'LABEL.INVOICE.CODE' |translate"></label>
+                        <div class="col-sm-7">
+                            <input ng-model="ctrl.payment.invoiceId" type="text" class="form-control" id="invoiceId" name="invoiceId" placeholder="{{'LABEL.INVOICE.CODE' | translate}}"
+                                readonly />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="accountBalance" class="control-label col-sm-5" ng-bind="'LABEL.APARTMENT.AMOUNT_BALANCE' |translate"></label>
+                        <div class="col-sm-7">
+                            <input ng-model="ctrl.payment.accountBalance" type="text" class="form-control" id="accountBalance" name="accountBalance"
+                                placeholder="{{'LABEL.APARTMENT.AMOUNT_BALANCE' | translate}}" readonly/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="paymentMethod" class="control-label col-sm-5" ng-bind="'LABEL.PAYMENT.PAYMENT_METHOD' |translate"></label>
+                        <div class="col-sm-7">
+                            <sm-payment-method ng-model="ctrl.payment.paymentMethod" sm-class="form-control" sm-input="true" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="paymentAmount" class="control-label col-sm-5" ng-bind="'LABEL.PAYMENT.AMOUNT' |translate"></label>
+                        <div class="col-sm-7">
+                            <input ng-model="ctrl.payment.paymentAmount" type="text" class="form-control" id="paymentAmount" name="paymentAmount" placeholder="{{'LABEL.PAYMENT.AMOUNT' | translate}}"
+                            ng-change="ctrl.calculateSum()" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>{{ 'LABEL.INVOICE_DETAIL.ITEM_NAME' | translate }}</th>
+                            <th>{{ 'LABEL.INVOICE_DETAIL.AMOUNT' | translate }}</th>
+                            <th>{{ 'LABEL.PAYMENT.PAYMENT_SELECT' | translate }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="itemToPay in ctrl.invoiceDetailItemList">
+                            <td>{{ itemToPay.itemName }}</td>
+                            <td>{{ itemToPay.amount }}</td>
+                            <td>
+                                <input type="checkbox" checked="checked" disabled="disabled" ng-show="itemToPay.itemName=='Debt'" />
+                                <input type="checkbox" ng-model="ctrl.checkList[itemToPay.invoiceDetailId]" 
+                                    ng-hide="itemToPay.itemName=='Debt'"
+                                    ng-click="ctrl.calculateSum()" />
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td>Tổng</td>
+                            <td>{{ ctrl.sum }}</td>
+                            <td>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button ng-disabled="!formApp.$dirty || !formApp.$valid" type="submit" class="btn btn-primary">
+                <i ng-class="(ctrl.invoice.invoiceId ? 'fa fa-edit' : 'fa fa-plus')"></i> {{ (ctrl.invoice.invoiceId ? 'BUTTON.UPDATE' : 'BUTTON.CREATE') | translate }}</button>
+        </div>
+    </form>
+</sm-modal-dialog>

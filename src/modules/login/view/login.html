@@ -1,0 +1,18 @@
+<p class="login-box-msg">Đăng nhập hệ thống</p>
+<form novalidate name="formLogin" ng-submit="formLogin.$valid && ctrl.onSubmit()">
+    <div class="form-group has-feedback">
+        <input type="text" class="form-control" name="username" placeholder="{{ 'LABEL.USER.USER_NAME' | translate }}" ng-model="ctrl.user.username"
+            ng-required="true" />
+        <i class="fa fa-user form-control-feedback" aria-hidden="true"></i>
+    </div>
+    <div class="form-group has-feedback">
+        <input type="password" class="form-control" id="password" ng-model="ctrl.user.password" placeholder="{{ 'LABEL.USER.PASSWORD' | translate }}"
+            ng-required="true" />
+        <i class="fa fa-key form-control-feedback" aria-hidden="true"></i>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary btn-block btn-flat">Đăng nhập</button>
+    </div>
+    <a ui-sref="forget-password">Quên mật khẩu</a>
+    <br>
+</form>

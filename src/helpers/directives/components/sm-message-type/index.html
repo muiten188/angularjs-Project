@@ -1,0 +1,9 @@
+<span>
+  <select ng-show="smInput" ng-model="messageType" ng-class="smClass" ng-required="smRequired" ng-readonly="smReadonly" ng-disabled="smDisabled">
+    <option value>-----{{'LABEL.MESSAGE_TYPE.PLACE_HOLDER' | translate}}-----</option>
+    <option ng-repeat="option in options" value="{{option.value}}">{{option.title | translate}}</option>
+  </select>
+  <span ng-show="!smInput">
+    {{messageTypeValue | translate}}
+  </span>
+</span>

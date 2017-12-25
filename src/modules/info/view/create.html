@@ -1,0 +1,56 @@
+<sm-modal-dialog modal-title="{{'LABEL.INFO.ADD_NEWS'| translate }}" type="update">
+    <form novalidate name="formApp" class="form-horizontal" ng-submit="formApp.$valid && ctrl.onSubmit()">
+        <!-- <input type="hidden" ng-model="ctrl.building.buildingId" /> -->
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="regulationCategory" class="col-sm-4 control-label" ng-bind="'LABEL.INFO.CATEGORY' |translate"></label>
+                <div class="col-sm-8">
+                    <sm-regulation-category ng-model="ctrl.regulation.regulationCategory" sm-class="form-control input-sm" sm-input="true" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="regulationSubCategory" class="col-sm-4 control-label" ng-bind="'LABEL.INFO.SUB_CATEGORY' |translate"></label>
+                <div class="col-sm-8">
+                    <sm-regulation-subcategory ng-model="ctrl.regulation.regulationSubCategory" sm-class="form-control input-sm" sm-input="true" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="title" class="col-sm-4 control-label " ng-bind="'LABEL.INFO.TITLE' |translate"></label>
+                <div class="col-sm-8">
+                    <input ng-model="ctrl.regulation.title" type="text" class="form-control" name="title" placeholder="{{'LABEL.INFO.PLACE_HOLDER_TITLE' | translate}}"
+                        maxlength="255" />
+                </div>
+            </div>
+            <div class="form-group">
+                    <div class="col-sm-12">
+                <label for="content" class="control-label" ng-bind="'LABEL.INFO.CONTENT' |translate"></label>
+                <textarea ng-model="ctrl.regulation.content" type="text" class="form-control" id="content"
+                    name="content" placeholder="{{'LABEL.INFO.PLACE_HOLDER_CONTENT' | translate}}"
+                    rows="5" maxlength="2000"  />
+                    </div>
+            </div>
+            <div class="form-group">
+                    <input type="file" id="fAttach" file-input="ctrl.listFAttach" file-input-change="ctrl.onInputFileChange(ctrl.listFAttach)" style="display: none;" multiple="true" accept=".xls,.xlsx,.docx,.doc" />
+                    <ul class="inline-ul">
+                        <li class="list-inline-item" ng-repeat="file in ctrl.listFAttach">
+                            <a>{{file.name}}</a>&nbsp  
+                            <button type="button" ng-show="ctrl.listFAttach.length>0" ng-click="ctrl.onRemoveFile(file,ctrl.listFAttach,'fAttach')">
+                                <i class="fa fa-minus" aria-hidden="true"></i>
+                            </button>
+                        </li>
+                        <li class="list-inline-item">
+                            
+                            <button type="button" ng-click="ctrl.onChooseFileClick('fAttach');$event.stopPropagation()">
+                                <i class="fa fa-paperclip" aria-hidden="true"></i>
+                            </button>
+                        </li>
+                    </ul>
+                <!-- <a for="address" href="#" class="col-sm-2 control-label"><i class="fa fa-paperclip" style="font-size: 20px;" aria-hidden="true"></i>&nbsp abc.png</a> -->
+            </div>
+        </div> 
+        <div class="modal-footer">
+            <button ng-disabled="!formApp.$dirty || !formApp.$valid" type="submit" class="btn btn-primary">
+                <i ng-class="'fa fa-edit'"></i> {{ 'BUTTON.CREATE' | translate }}</button>
+        </div>
+    </form>
+</sm-modal-dialog>

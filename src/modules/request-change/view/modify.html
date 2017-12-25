@@ -1,0 +1,149 @@
+<sm-modal-dialog modal-title="{{(ctrl.resident.residentId ? 'LABEL.COMMON.UPDATE' : 'LABEL.COMMON.CREATE') | translate }}"
+type="{{ctrl.resident.residentId ? 'update' : 'create'}}">
+<form novalidate name="formApp" class="form-horizontal" ng-submit="formApp.$valid && ctrl.onSubmit()">
+    <input ng-if="ctrl.resident.residentId" type="hidden" ng-model="ctrl.resident.residentId" />
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="thumbnail">
+                    <sm-image img-path="{{ctrl.resident.avatar}}" img-style="width:100%; max-height: 200px;" />
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="firstname" class="col-sm-4 control-label" ng-bind="'LABEL.RESIDENT.FIRST_NAME' |translate"></label>
+                    <div class="col-sm-8">
+                        <input ng-model="ctrl.resident.firstname" type="text" class="form-control" name="firstname" placeholder="{{'LABEL.RESIDENT.PLACE_HOLDER_FIRST_NAME' | translate}}"
+                            readonly/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="surname" class="col-sm-4 control-label" ng-bind="'LABEL.RESIDENT.SUR_NAME' |translate"></label>
+                    <div class="col-sm-8">
+                        <input ng-model="ctrl.resident.surname" type="text" class="form-control" name="surname" placeholder="{{'LABEL.RESIDENT.PLACE_HOLDER_SUR_NAME' | translate}}"
+                            readonly />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="birthday" class="col-sm-4 control-label" ng-bind="'LABEL.RESIDENT.BIRTHDAY' |translate"></label>
+                    <div class="col-sm-8">
+                        <div class="input-group">
+                            <input type="text" class="form-control date-picker" id="birthday" ng-model="ctrl.resident.birthday" placeholder="{{ 'LABEL.RESIDENT.PLACE_HOLDER_BIRTHDAY' | translate }}"
+                                readonly />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="gender" class="col-sm-4 control-label" ng-bind="'LABEL.RESIDENT.GENDER' |translate"></label>
+                    <div class="col-sm-8">
+                        <sm-gender ng-model="ctrl.resident.gender" ng-class="form-control" ng-required="true" ng-readonly="true" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="identifyCard" class="col-sm-4 control-label required" ng-bind="'LABEL.RESIDENT.IDENTITY' |translate"></label>
+                    <div class="col-sm-8">
+                        <input ng-model="ctrl.resident.identifyCard" type="text" class="form-control" name="identifyCard" placeholder="{{'LABEL.RESIDENT.PLACE_HOLDER_IDENTITY' | translate}}"
+                            readonly />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class=" form-group">
+                    <label for="phoneNumber" class="col-sm-4 control-label required" ng-bind="'LABEL.RESIDENT.PHONE_NUMBER_1' |translate"></label>
+                    <div class="col-sm-8">
+                        <input ng-model="ctrl.resident.phoneNumber" type="text" class="form-control" name="phoneNumber" placeholder="{{'LABEL.RESIDENT.PLACE_HOLDER_PHONE_NUMBER_1' | translate}}"
+                            readonly />
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="subPhoneNumber" class="col-sm-4 control-label" ng-bind="'LABEL.RESIDENT.PHONE_NUMBER_2' |translate"></label>
+                    <div class="col-sm-8">
+                        <input ng-model="ctrl.resident.subPhoneNumber" type="text" class="form-control" name="subPhoneNumber" placeholder="{{'LABEL.RESIDENT.PLACE_HOLDER_PHONE_NUMBER_2' | translate}}"
+                            readonly />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group ">
+                    <label for="email" class="col-sm-4 control-label" ng-bind="'LABEL.RESIDENT.EMAIL' |translate"></label>
+                    <div class="col-sm-8">
+                        <input ng-model="ctrl.resident.email" type="text" class="form-control" name="email" placeholder="{{'LABEL.RESIDENT.PLACE_HOLDER_EMAIL' | translate}}"
+                            readonly />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class=" form-group">
+                    <label for="origin" class="col-sm-4 control-label" ng-bind="'LABEL.RESIDENT.BIRTHPLACE' |translate"></label>
+                    <div class="col-sm-8">
+                        <input ng-model="ctrl.resident.origin" type="text" class="form-control" name="origin" placeholder="{{'LABEL.RESIDENT.PLACE_HOLDER_BIRTHPLACE' | translate}}"
+                            readonly/>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="occupation" class="col-sm-4 control-label" ng-bind="'LABEL.RESIDENT.JOB' |translate"></label>
+                    <div class="col-sm-8">
+                        <input ng-model="ctrl.resident.occupation" type="text" class="form-control" name="occupation" placeholder="{{'LABEL.RESIDENT.PLACE_HOLDER_JOB' | translate}}"
+                            readonly />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group ">
+                    <label for="role" class="col-sm-4 control-label" ng-bind="'LABEL.RESIDENT.ROLE' |translate"></label>
+                    <div class="col-sm-8">
+                        <sm-account-type ng-model="ctrl.resident.role" sm-class="form-control" sm-required="true" ng-readonly="true" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group ">
+                    <label for="influencer" class="col-sm-4 control-label" ng-bind="'LABEL.RESIDENT.INFLUENCER' |translate"></label>
+                    <div class="col-sm-8">
+                        <input ng-model="ctrl.resident.influencer" type="text" class="form-control" name="influencer" placeholder="{{'LABEL.RESIDENT.INFLUENCER' | translate}}"
+                            readonly />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group ">
+                    <label for="dependentRelationship" class="col-sm-4 control-label" ng-bind="'LABEL.RESIDENT.RELATIONSHIP' |translate"></label>
+                    <div class="col-sm-8">
+                        <input ng-model="ctrl.resident.dependentRelationship" type="text" class="form-control" name="unknown" placeholder="{{'LABEL.RESIDENT.PLACE_HOLDER_RELATIONSHIP' | translate}}"
+                            readonly />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group ">
+                <label for="replyMessage" class="col-sm-2 control-label required" ng-bind="'LABEL.REQUEST_CHANGE.REPLY_MESSAGE' |translate"></label>
+                <div class="col-sm-10">
+                    <input ng-model="ctrl.resident.replyMessage" type="text" class="form-control" name="replyMessage" placeholder="{{'LABEL.RESIDENT.PLACE_HOLDER_REPLY_MESSAGE' | translate}}"
+                    />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">
+            <i class="fa fa-check"></i> {{ 'BUTTON.ACCEPT' | translate }}</button>
+        <button type="submit" class="btn btn-primary">
+            <i class="fa fa-danger"></i> {{ 'BUTTON.REJECT' | translate }}</button>
+    </div>
+</form>
+</sm-modal-dialog>

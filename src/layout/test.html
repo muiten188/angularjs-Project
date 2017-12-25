@@ -1,0 +1,35 @@
+<!doctype html>
+<html ng-app="app" lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <title>SME App</title>
+  <base href="/">
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic" rel="stylesheet">
+</head>
+</head>
+
+<body>
+  <div ng-controller="TestController as ctrl">
+    <ui-select ng-model="apartmentId" theme="bootstrap">
+      <ui-select-match placeholder="Select an aprtment...">{{$select.selected.name}}</ui-select-match>
+      <ui-select-choices refresh="ctrl.refreshApartments($select.search)" refresh-delay="500" repeat="item in ctrl.availableApartments">
+        <small>{{item.name}}</small>
+      </ui-select-choices>
+    </ui-select>
+
+    ----------------------
+
+    <ui-select ng-model="ctrl.person.selected" theme="bootstrap">
+      <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.name}}</ui-select-match>
+      <ui-select-choices repeat="item in ctrl.people | filter: $select.search">
+        <div ng-bind-html="item.name | highlight: $select.search"></div>
+        <small ng-bind-html="item.email | highlight: $select.search"></small>
+      </ui-select-choices>
+    </ui-select>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,58 @@
+<!doctype html>
+<html ng-app="app" lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <title>SME App</title>
+  <base href="/">
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic" rel="stylesheet">
+</head>
+</head>
+
+<body class="hold-transition skin-blue sidebar-mini">
+  <div class="wrapper">
+    <!-- Main Header -->
+    <header class="main-header">
+      <!-- Logo -->
+      <a href="#" class="logo">
+        <!-- mini logo for sidebar mini 50x50 pixels -->
+        <span class="logo-mini">
+          <!-- <b>Admin</b> -->
+        </span>
+        <!-- logo for regular state and mobile devices -->
+        <span class="logo-lg">
+          <b>Hapulico</b></span>
+      </a>
+
+      <!-- Header Navbar -->
+      <nav class="navbar navbar-static-top" role="navigation">
+        <app-header></app-header>
+      </nav>
+    </header>
+
+    <!-- Left side column. contains the logo and sidebar -->
+    <app-menu></app-menu>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div id="content-wrapper" class="content-wrapper">
+      <div class="sm-page" ui-view></div>
+    </div>
+    <!-- /.content-wrapper -->
+
+    <!-- Main Footer -->
+    <footer class="main-footer">
+      <!-- To the right -->
+      <div class="pull-right hidden-xs">
+        Phần mềm quản lý tương tác cư dân Hapulico
+      </div>
+      <!-- Default to the left -->
+      <strong>Copyright &copy; 2017.</strong> All rights reserved.
+    </footer>
+  </div>
+  <!-- ./wrapper -->
+
+</body>
+
+</html>

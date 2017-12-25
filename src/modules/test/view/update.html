@@ -1,0 +1,66 @@
+<sm-modal-dialog title="{{ 'LABEL.COMMON.UPDATE' | translate }}" type="update">
+	<form novalidate name="formApp" ng-submit="formApp.$valid && ctrl.onSubmit()">
+		<input type="hidden" ng-model="ctrl.user.id" />
+
+		<div class="modal-body">
+			<div class="row">
+				<div class="form-group col-sm-6">
+					<label for="userName" class="control-label">{{ 'LABEL.USER.USER_NAME' | translate }}</label>
+					<input type="text" class="form-control" name="userName" id="userName" placeholder="{{ 'LABEL.USER.USER_NAME' | translate }}"
+					    ng-model="ctrl.user.userName" ng-required="true" ng-minlength="8" ng-maxlength="50" />
+					<span class="help-block-error" ng-messages="(formApp.$submitted || formApp.userName.$dirty) && formApp.userName.$error">
+						<div ng-messages-include="statics/validation/message.fullname.html"></div>
+					</span>
+				</div>
+				<div class="form-group col-sm-6">
+					<label for="fullName" class="control-label">{{ 'LABEL.USER.FULL_NAME' | translate }}</label>
+					<input type="text" class="form-control" id="fullName" ng-model="ctrl.user.fullName" placeholder="{{ 'LABEL.USER.FULL_NAME' | translate }}"
+					/>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group col-sm-6">
+					<label for="password" class="control-label">{{ 'LABEL.USER.PASSWORD' | translate }}</label>
+					<input type="password" class="form-control" id="password" ng-model="ctrl.user.password" placeholder="{{ 'LABEL.USER.PASSWORD' | translate }}"
+					/>
+				</div>
+				<div class="form-group col-sm-6">
+					<label for="repassword" class="control-label">{{ 'LABEL.USER.CONFIRM_PASSWORD' | translate }}</label>
+					<input type="password" class="form-control" id="repassword" ng-model="ctrl.user.repassword" placeholder="{{ 'LABEL.USER.CONFIRM_PASSWORD' | translate }}"
+					/>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group col-sm-6">
+					<label for="email" class="control-label">{{ 'LABEL.COMMON.EMAIL' | translate }}</label>
+					<input type="email" class="form-control" id="email" ng-model="ctrl.user.email" placeholder="{{ 'LABEL.COMMON.EMAIL' | translate }}"
+					/>
+				</div>
+				<div class="form-group col-sm-6">
+					<label for="phoneNumber" class="control-label">{{ 'LABEL.COMMON.PHONE_NUMBER' | translate }}</label>
+					<input type="text" class="form-control" id="phoneNumber" ng-model="ctrl.user.phoneNumber" placeholder="{{ 'LABEL.COMMON.PHONE_NUMBER' | translate }}"
+					/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="address" class="control-label">{{ 'LABEL.COMMON.ADDRESS' | translate }}</label>
+				<input type="text" class="form-control" id="address" ng-model="ctrl.user.address" placeholder="{{ 'LABEL.COMMON.ADDRESS' | translate }}"
+				/>
+			</div>
+			<div class="form-group">
+				<label for="role" class="control-label">{{ 'LABEL.COMMON.ROLE' | translate }}</label>
+				<select class="form-control" id="role" ng-model="ctrl.user.id" to-number>
+					<option value="">---Please select---</option>
+                    <option value="1">option 1</option>
+                    <option value="2">option 2</option>
+                    <option value="3">option 3</option>
+                    <option value="4">option 4</option>
+                    <option value="5">option 5</option>
+                  </select>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<button type="submit" class="btn btn-primary"><i class="fa fa-edit"></i> {{ 'BUTTON.UPDATE' | translate }}</button>
+		</div>
+	</form>
+</sm-modal-dialog>

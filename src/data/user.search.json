@@ -1,0 +1,112 @@
+{
+    "data": [{
+        "id": 1,
+        "userName": "Reeva",
+        "password": "XZR8c6qF",
+        "fullName": "Reeva Glaum",
+        "email": "rglaum0@prnewswire.com",
+        "gender": "Female",
+        "phoneNumber": "992-(580)497-2288",
+        "address": "49177 Sunnyside Terrace"
+    }, {
+        "id": 2,
+        "userName": "Quill",
+        "password": "aXgQqjzg",
+        "fullName": "Quill Crocket",
+        "email": "qcrocket1@google.com",
+        "gender": "Male",
+        "phoneNumber": "968-(983)846-8036",
+        "address": "4 Hanover Center"
+    }, {
+        "id": 3,
+        "userName": "Deonne",
+        "password": "ckXsxLGX",
+        "fullName": "Deonne Lordon",
+        "email": "dlordon2@printfriendly.com",
+        "gender": "Female",
+        "phoneNumber": "380-(861)709-1778",
+        "address": "32363 Canary Parkway"
+    }, {
+        "id": 4,
+        "userName": "Steffie",
+        "password": "4Qq81ndD",
+        "fullName": "Steffie Dunguy",
+        "email": "sdunguy3@washington.edu",
+        "gender": "Female",
+        "phoneNumber": "55-(845)289-1784",
+        "address": "05791 Swallow Trail"
+    }, {
+        "id": 5,
+        "userName": "Hirsch",
+        "password": "W1Skyh",
+        "fullName": "Hirsch Decruse",
+        "email": "hdecruse4@msu.edu",
+        "gender": "Male",
+        "phoneNumber": "86-(662)943-5077",
+        "address": "0539 Buena Vista Parkway"
+    }, {
+        "id": 6,
+        "userName": "Florian",
+        "password": "VWKyFx2",
+        "fullName": "Florian Rizon",
+        "email": "frizon5@phoca.cz",
+        "gender": "Male",
+        "phoneNumber": "236-(357)486-8397",
+        "address": "0521 6th Trail"
+    }, {
+        "id": 7,
+        "userName": "Mercy",
+        "password": "2xrvdC",
+        "fullName": "Mercy Bynert",
+        "email": "mbynert6@imageshack.us",
+        "gender": "Female",
+        "phoneNumber": "62-(456)314-5395",
+        "address": "0191 Little Fleur Terrace"
+    }, {
+        "id": 8,
+        "userName": "Darice",
+        "password": "yqj7wL",
+        "fullName": "Darice Gillcrist",
+        "email": "dgillcrist7@nature.com",
+        "gender": "Female",
+        "phoneNumber": "351-(263)774-3164",
+        "address": "2502 Mayfield Crossing"
+    }, {
+        "id": 9,
+        "userName": "Sheffield",
+        "password": "mCyHo9ZFe",
+        "fullName": "Sheffield Nan Carrow",
+        "email": "snan8@istockphoto.com",
+        "gender": "Male",
+        "phoneNumber": "995-(293)640-2491",
+        "address": "687 Scott Place"
+    }, {
+        "id": 10,
+        "userName": "Stanford",
+        "password": "ZcT5S9AwiGPF",
+        "fullName": "Stanford Druery",
+        "email": "sdruery9@who.int",
+        "gender": "Male",
+        "phoneNumber": "49-(920)418-4941",
+        "address": "145 Hollow Ridge Drive"
+    }, {
+        "id": 11,
+        "userName": "Lynelle",
+        "password": "yRR5vl2YqPKu",
+        "fullName": "Lynelle Naper",
+        "email": "lnapera@moonfruit.com",
+        "gender": "Female",
+        "phoneNumber": "967-(134)937-9933",
+        "address": "25 Columbus Road"
+    }, {
+        "id": 12,
+        "userName": "Lorens",
+        "password": "DMIIuZkmRyDk",
+        "fullName": "Lorens Bushell",
+        "email": "lbushellb@dion.ne.jp",
+        "gender": "Male",
+        "phoneNumber": "353-(468)817-0474",
+        "address": "2 Vahlen Road"
+    }],
+    "total": 123
+}

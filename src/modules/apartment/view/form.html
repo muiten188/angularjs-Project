@@ -1,0 +1,114 @@
+<sm-modal-dialog modal-title="{{(ctrl.apartment.apartmentId ? 'LABEL.COMMON.UPDATE' : 'LABEL.COMMON.CREATE') | translate }}"
+    type="{{ctrl.apartment.apartmentId ? 'update' : 'create'}}">
+    <form novalidate name="formApp" ng-submit="formApp.$valid && ctrl.onSubmit()">
+        <input ng-if="ctrl.apartment.apartmentId" type="hidden" ng-model="ctrl.apartment.apartmentId" />
+        <div class="modal-body">
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label for="buildingId" class="control-label required" ng-bind="'LABEL.BUILDING.CODE' |translate"></label>
+                    <select ng-model="ctrl.apartment.buildingId" id="buildingId" class="form-control" to-number required ng-change="ctrl.onBuildingChange()">
+                        <option ng-repeat="option in ctrl.listBuilding" value="{{option.buildingId}}">{{option.code}}</option>
+                    </select>
+                    <div class="box-validate">
+                        <div ng-show="formApp.buildingId.$dirty && formApp.buildingId.$invalid" class="text-danger">
+                            <i class="fa fa-times text-danger"></i>
+                            <span ng-show="formApp.buildingId.$error.required" ng-bind="'SYSTEM.ERROR.REQUIRED' | translate"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="floorId" class="control-label required" ng-bind="'LABEL.FLOOR.CODE' |translate"></label>
+                    <select ng-model="ctrl.apartment.floorId" id="floorId" class="form-control" to-number required>
+                        <option ng-repeat="option in ctrl.listFloor" value="{{option.floorId}}">{{option.code}}</option>
+                    </select>
+                    <div class="box-validate">
+                        <div ng-show="formApp.floorId.$dirty && formApp.floorId.$invalid" class="text-danger">
+                            <i class="fa fa-times text-danger"></i>
+                            <span ng-show="formApp.floorId.$error.required" ng-bind="'SYSTEM.ERROR.REQUIRED' | translate"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label for="name" class="control-label required" ng-bind="'LABEL.APARTMENT.NAME' |translate"></label>
+                    <input ng-model="ctrl.apartment.name" type="text" class="form-control" id="name" name="name" placeholder="{{'LABEL.APARTMENT.PLACE_HOLDER_NAME' | translate}}"
+                        maxlength="45" required />
+                    <div class="box-validate">
+                        <div ng-show="formApp.name.$dirty && formApp.name.$invalid" class="text-danger">
+                            <i class="fa fa-times text-danger"></i>
+                            <span ng-show="formApp.name.$error.required" ng-bind="'SYSTEM.ERROR.REQUIRED' | translate"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="plan" class="control-label" ng-bind="'LABEL.APARTMENT.PLAN' |translate"></label>
+                    <sm-floor-direction ng-model="ctrl.apartment.direction" sm-class="form-control input-sm" sm-input="true" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label for="area" class="control-label" ng-bind="'LABEL.APARTMENT.AREA' |translate"></label>
+                    <input ng-model="ctrl.apartment.area" type="number" class="form-control" name="area" placeholder="{{'LABEL.APARTMENT.PLACE_HOLDER_AREA' | translate}}"
+                        maxlength="10" />
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="numberBedroom" class="control-label" ng-bind="'LABEL.APARTMENT.NUMBER_BEDROOM' |translate"></label>
+                    <input ng-model="ctrl.apartment.numberBedroom" type="number" class="form-control" name="numberBedroom" min="0" max="10" placeholder="{{'LABEL.APARTMENT.PLACE_HOLDER_NUMBER_BEDROOM' | translate}}"
+                    />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 form-group">
+                    <label for="tariffId" class=" required control-label" ng-bind="'LABEL.SERVICE_REGISTRATION.FEEBILL' |translate"></label>
+                    <select ng-model="ctrl.apartment.tariffId" id="tariffId" name="tariffId"
+                        class="form-control" to-number required>
+                        <option ng-repeat="option in ctrl.listTariffId" value="{{option.tariffId}}">{{option.tariffName}}</option>
+                    </select>
+                    <div class="box-validate">
+                        <div ng-show="formApp.tariffId.$dirty && formApp.tariffId.$invalid" class="text-danger">
+                            <i class="fa fa-times text-danger"></i>
+                            <span ng-show="formApp.tariffId.$error.required" ng-bind="'SYSTEM.ERROR.REQUIRED' | translate"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="groupList" class="control-label">{{ 'LABEL.COMMON.GROUP' | translate }}</label>
+                <ui-select multiple ng-model="ctrl.groupList" theme="bootstrap" close-on-select="false" title="Choose a group">
+                    <ui-select-match placeholder="Select groups...">{{$item.name}}</ui-select-match>
+                    <ui-select-choices refresh="ctrl.refreshGroups($select.search)" refresh-delay="0" repeat="item in ctrl.availableGroups">
+                        {{item.name}}
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <label for="numberBedroom" class="control-label required">{{ 'LABEL.APARTMENT.PLANS' | translate }}</label>
+                </div>
+                <div class="col-md-3 col-xs-6" ng-repeat="plan in ctrl.apartment.plans"> 
+                    <div class="thumbnail thumb-image">
+                        <a ng-if="ctrl.apartment.plans && ctrl.apartment.plans.length > 0" ng-href="javascript:void(0)" ng-click="ctrl.showPicture($index)">
+                            <sm-image img-path="{{plan.path}}" img-style="width:100%; height: 75px;" />
+                        </a>
+                        <a href="javascript:void(0)" class="thumb-close">x</a>
+                    </div>
+                </div>
+                <div class="col-md-3 col-xs-6">
+                    <div class="thumbnail">
+                        <div ngf-select="ctrl.uploadFiles($files)" ng-model="files" ngf-multiple="true" ngf-allow-dir="true" multiple="multiple"
+                            class="drop-box" ngf-drag-over-class="'dragover'" accept="image/*,application/pdf" ngf-pattern="'image/*,application/pdf'"
+                            style="width:100%; height: 75px;">
+                            {{ 'LABEL.COMMON.UPLOAD_DROP_BOX' | translate }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button ng-disabled="!formApp.$dirty || !formApp.$valid" type="submit" class="btn btn-primary">
+                <i ng-class="(ctrl.apartment.apartmentId ? 'fa fa-edit' : 'fa fa-plus')"></i> {{ (ctrl.apartment.apartmentId ? 'BUTTON.UPDATE' : 'BUTTON.CREATE') | translate }}</button>
+        </div>
+    </form>
+</sm-modal-dialog>

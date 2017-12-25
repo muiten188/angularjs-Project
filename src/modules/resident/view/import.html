@@ -1,0 +1,100 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>{{ 'MENU.RESIDENT' | translate }}
+        <small>{{ 'MENU.RESIDENT_IMPORT' | translate }}</small>
+    </h1>
+</section>
+<!-- Main content -->
+<section class="content">
+    <div class="box">
+        <div class="box-body">
+            <form novalidate name="formApp" class="form-horizontal" ng-submit="formApp.$valid && ctrl.onSubmit()">
+                <uib-tabset class="nav-tabs-custom" active="ctrl.import.activeTab">
+                    <uib-tab index="0" heading="B1. Tải file mẫu">
+                        <div style="min-height: 200px">
+                            <div class="col-md-6 col-md-offset-3">
+                                <div class="form-group">
+                                    <label for="firstname" class="col-sm-4 control-label" ng-bind="'LABEL.RESIDENT.CHOOSE_IMPORT_FILE' |translate"></label>
+                                    <div class="col-sm-8">
+                                        <select class="form-control" ng-init="ctrl.import.import_file = 'INFO'" ng-model="ctrl.import.import_file">
+                                            <!-- <option value>{{'LABEL.RESIDENT.CHOOSE_IMPORT_FILE' | translate}}</option> -->
+                                            <option  value="INFO">{{'LABEL.RESIDENT.IMPORT_RESIDENT_INFO' | translate}}</option>
+                                            <!-- <option value="APARTMENT">{{'LABEL.RESIDENT.IMPORT_RESIDENT_APARTMENT' | translate}}</option> -->
+                                        </select>
+                                    </div>
+                                </div>
+                                <div style="text-align: center">
+                                    <button class="btn btn-primary" ng-click="ctrl.onDownloadSampleFile()">
+                                        <i style="font-size: 2em;" class="fa fa-download" aria-hidden="true"></i> {{'LABEL.RESIDENT.DOWNLOAD_SAMPLE_FILE'|translate}}
+                                    </button>
+                                </div>
+                                <button type="button" class="btn btn-primary pull-right btn-sm" ng-click="ctrl.import.activeTab = 1">
+                                    <i class="fa fa-angle-right"></i> {{'BUTTON.GO_NEXT'|translate}}</button>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </uib-tab>
+                    <uib-tab index="1" heading="B2. Chọn file">
+                        <div style="min-height: 200px">
+                            <div class="col-md-6 col-md-offset-3">
+                                <div class="form-group">
+                                    <div ngf-select="ctrl.uploadFile($file)" ng-model="ctrl.files" ngf-multiple="false" ngf-allow-dir="true" class="drop-box"
+                                        ngf-drag-over-class="'dragover'">
+                                        <div style="border: #666 dotted 2px; line-height: 100px; text-align: center; cursor: pointer">
+                                            <div ng-if="!ctrl.files">
+                                                {{'LABEL.RESIDENT.CHOOSE_IMPORT_FILE' |translate}}
+                                            </div>
+                                            <div ng-if="ctrl.files">
+                                                File {{ctrl.files.name}}, size {{ctrl.files.size}} Byte
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <button type="button" class="btn btn-primary pull-left btn-sm" ng-click="ctrl.import.activeTab = 0">
+                                        <i class="fa fa-angle-left"></i> {{'BUTTON.GO_BACK'|translate}}</button>
+                                    <button type="button" class="btn btn-primary pull-right btn-sm" ng-click="ctrl.import.activeTab = 2" ng-disabled="!ctrl.files">
+                                        <i class="fa fa-angle-right"></i> {{'BUTTON.GO_NEXT'|translate}}</button>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+
+                    </uib-tab>
+                    <uib-tab index="2" heading="B3. Hoàn tất">
+                        <div style="min-height: 200px">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>{{ 'LABEL.RESIDENT.IMPORT.ROW' | translate }}</th>
+                                        <th>{{ 'LABEL.RESIDENT.IMPORT.CELL' | translate }}</th>
+                                        <th>{{ 'LABEL.RESIDENT.IMPORT.FIELD' | translate }}</th>
+                                        <th>{{ 'LABEL.RESIDENT.IMPORT.DATA_INVALID' | translate }}</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="model in ctrl.datasource.data">
+                                        <td>{{ model.row }}</td>
+                                        <td>{{ model.cell }}</td>
+                                        <td>{{ model.field | translate}}</td>
+                                        <td>{{ model.valueInvalid }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="text-center">
+                                <button type="button" class="btn btn-primary pull-left btn-sm" ng-click="ctrl.import.activeTab = 1">
+                                    <i class="fa fa-angle-left"></i> {{'BUTTON.GO_BACK'|translate}}</button>
+                                <!-- <button type="button" class="btn btn-primary btn-sm">
+                                    <i class="fa fa-check"></i> {{'BUTTON.FINISH'|translate}}</button> -->
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+
+                    </uib-tab>
+                </uib-tabset>
+            </form>
+        </div>
+    </div>
+</section>
+<!-- /.content -->

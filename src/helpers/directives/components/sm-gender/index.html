@@ -1,0 +1,10 @@
+<span>
+  <select ng-show="smInput" ng-model="gender" ng-class="smClass" ng-required="smRequired" ng-readonly="smReadonly">
+    <option value>-----{{'LABEL.COMMON.GENDER' | translate}}-----</option>
+    <option value="MALE">{{'LABEL.COMMON.MALE' | translate}}</option>
+    <option value="FEMALE">{{'LABEL.COMMON.FEMALE' | translate}}</option>
+  </select>
+  <span ng-show="!smInput">
+    {{genderValue | translate}}
+  </span>
+</span>

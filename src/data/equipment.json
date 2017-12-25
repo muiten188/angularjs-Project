@@ -1,0 +1,45 @@
+{
+    "listData": [
+        {
+            "equipmentId": "1",
+            "equipmentName": "Quạt",
+            "port": "1",
+            "status": "0",
+            "duration": "10",
+            "deviceId": "1"
+        },
+        {
+            "equipmentId": "2",
+            "equipmentName": "Đèn 1",
+            "port": "2",
+            "status": "1",
+            "duration": "20",
+            "deviceId": "1"
+        },
+        {
+            "equipmentId": "3",
+            "equipmentName": "Đèn 2",
+            "port": "3",
+            "status": "1",
+            "duration": "14",
+            "deviceId": "1"
+        },
+        {
+            "equipmentId": "4",
+            "equipmentName": "Máy bơm 1",
+            "port": "4",
+            "status": "0",
+            "duration": "10",
+            "deviceId": "1"
+        },
+        {
+            "equipmentId": "5",
+            "equipmentName": "Máy bơm 2",
+            "port": "5",
+            "status": "1",
+            "duration": "17",
+            "deviceId": "1"
+        }
+    ],
+    "total": 123
+}

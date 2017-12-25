@@ -1,0 +1,69 @@
+<sm-modal-dialog modal-title="{{ 'LABEL.COMMON.UPDATE' | translate }}" type="update">
+    <form novalidate name="formApp" ng-submit="formApp.$valid && ctrl.onSubmit()" class="form-horizontal">
+        <input type="hidden" ng-model="ctrl.invoice.invoiceId" />
+        <div class="modal-body">
+            <div class="row">
+                <div class="form-group col-md-6 no-padding">
+                    <label for="name" class="control-label col-sm-5" ng-bind="'LABEL.COMMON.APARTMENT' |translate"></label>
+                    <div class="col-sm-7">
+                        <input ng-value="ctrl.invoice.apartmentName" type="text" class="form-control" placeholder="{{'LABEL.COMMON.APARTMENT' | translate}}"
+                            readonly />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6 no-padding">
+                    <label for="month" class="control-label col-sm-5" ng-bind="'LABEL.COMMON.MONTH' |translate"></label>
+                    <div class="col-sm-7">
+                        <input type="text" class="form-control" ng-model="ctrl.invoice.month" readonly/>
+                    </div>
+                </div>
+                <div class="form-group col-md-6 no-padding">
+                    <label for="invoiceId" class="control-label col-sm-5" ng-bind="'LABEL.INVOICE.CODE' |translate"></label>
+                    <div class="col-sm-7">
+                        <input ng-model="ctrl.invoice.invoiceId" type="text" class="form-control" id="invoiceId" name="invoiceId" placeholder="{{'LABEL.INVOICE.PLACE_HOLDER_NAME' | translate}}"
+                            readonly />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6 no-padding">
+                    <label for="messageStatus" class="control-label col-sm-5" ng-bind="'LABEL.COMMON.STATUS' |translate"></label>
+                    <div class="col-sm-7">
+                        <sm-message-status ng-model="ctrl.invoice.messageStatus" sm-class="form-control" sm-input="true" ng-disabled="true" />
+                    </div>
+                </div>
+                <div class="form-group col-md-6 no-padding">
+                    <label for="invoiceStatus" class="control-label col-sm-5" ng-bind="'LABEL.COMMON.PAYMENT' |translate"></label>
+                    <div class="col-sm-7">
+                        <sm-invoice-status ng-model="ctrl.invoice.invoiceStatus" sm-class="form-control" sm-input="true" ng-disabled="true" />
+                    </div>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>{{ 'LABEL.INVOICE_DETAIL.ITEM_NAME' | translate }}</th>
+                            <th>{{ 'LABEL.INVOICE_DETAIL.AMOUNT' | translate }}</th>
+                            <th>{{ 'LABEL.INVOICE_DETAIL.PAID' | translate }}</th>
+                            <th>{{ 'LABEL.INVOICE_DETAIL.REMAIN' | translate }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="invoiceDetail in ctrl.invoice.invoiceDetailItemList">
+                            <td>{{ invoiceDetail.itemName }}</td>
+                            <td>{{ invoiceDetail.amount }}</td>
+                            <td>{{ invoiceDetail.paid }}</td>
+                            <td>{{ invoiceDetail.remain }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">
+                <i class="fa fa-edit"></i> {{ 'BUTTON.UPDATE' | translate }}</button>
+        </div>
+    </form>
+</sm-modal-dialog>

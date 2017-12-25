@@ -1,0 +1,10 @@
+<sm-modal-dialog modal-title="{{ 'LABEL.COMMON.NOTIFICATION' | translate }}">
+    <form novalidate name="formApp" ng-submit="formApp.$valid && ctrl.onSubmit()">
+        <div class="modal-body">
+            Thiếu mô tả nội dung thông báo
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-default" ng-click="ctrl.close()">{{'BUTTON.CLOSE'|translate}}</button>
+        </div>
+    </form>
+</sm-modal-dialog>  

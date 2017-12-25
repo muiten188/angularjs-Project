@@ -1,0 +1,132 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <h1>{{ 'MENU.INVOICE' | translate }}
+    <!-- <small>{{ 'MENU.INVOICE' | translate }}</small> -->
+  </h1>
+</section>
+<!-- Main content -->
+<section class="content">
+  <div class="box">
+    <div class="box-body no-padding">
+      <div class="form-search clearfix">
+        <div class="col-sm-9 search-controls">
+          <div class="row-no-padding">
+            <div class="form-group col-md-2">
+              <label class="sr-only">{{'LABEL.COMMON.APARTMENT' |translate}}</label>
+              <div class="input-group">
+                <div class="input-group-addon">
+                  <i class="fa fa-list-ol" aria-hidden="true"></i>
+                </div>
+                <input type="text" class="form-control input-sm" ng-model="ctrl.invoice.apartmentName" placeholder="{{'LABEL.COMMON.APARTMENT' |translate}}">
+              </div>
+            </div>
+            <div class="form-group col-md-2">
+              <label class="sr-only">{{'LABEL.COMMON.MONTH' |translate}}</label>
+              <div class="input-group">
+                <input type="text" class="form-control input-sm" uib-datepicker-popup="MM/yyyy" ng-change="ctrl.onMonthChange()" ng-model="ctrl.invoice.monthDate"
+                  ng-required="false" close-text="Close" is-open="ctrl.invoice.show" />
+                <span class="input-group-addon" ng-click="ctrl.invoice.show = true">
+                  <i class="fa fa-calendar" aria-hidden="true"></i>
+                </span>
+              </div>
+            </div>
+            <div class="form-group col-md-2">
+              <label class="sr-only">{{'LABEL.COMMON.STATUS' |translate}}</label>
+              <div class="input-group">
+                <div class="input-group-addon">
+                  <i class="fa fa-list-ol" aria-hidden="true"></i>
+                </div>
+                <sm-invoice-status ng-model="ctrl.invoice.invoiceStatus" sm-class="form-control input-sm" sm-input="true" />
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-sm btn-search-small" ng-click="ctrl.onSearch({pageIndex: 1})">
+              <i class="fa fa-search"></i>
+            </button>
+          </div>
+        </div>
+        <div class="col-sm-3 search-buttons">
+          <button type="submit" class="btn btn-primary btn-sm btn-search-large" ng-click="ctrl.onSearch({pageIndex: 1})">
+            <i class="fa fa-search"></i> Tìm kiếm
+          </button>
+          <button type="button" class="btn btn-primary btn-sm" ng-click="ctrl.onGenerateInvoices()">
+            <i class="fa fa-refresh"></i> {{ 'BUTTON.GENERATE' | translate }}</button>
+          <button type="button" class="btn btn-primary btn-sm" ng-click="ctrl.onUpdateInvoices()">
+            <i class="fa fa-edit"></i> {{ 'BUTTON.UPDATE' | translate }}</button>
+          <button type="button" class="btn btn-primary btn-sm" ng-click="ctrl.onPublishInvoices()">
+            <i class="fa fa-upload"></i> {{ 'BUTTON.PUBLISH' | translate }}</button>
+        </div>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover" st-table st-click="ctrl.onSearch(paging)">
+          <thead>
+            <tr>
+              <th class="text-center" style="width: 30px">
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" ng-click="ctrl.onCheckAll()" ng-model="ctrl.isCheckAll" />
+                    <span class="cr">
+                      <i class="cr-icon fa fa-check"></i>
+                    </span>
+                  </label>
+                </div>
+              </th>
+              <th>{{ 'LABEL.BUILDING.CODE' | translate }}</th>
+              <th>{{ 'LABEL.FLOOR.CODE' | translate }}</th>
+              <th>{{ 'LABEL.COMMON.APARTMENT' | translate }}</th>
+              <th>{{ 'LABEL.COMMON.MONTH' | translate }}</th>
+              <th>{{ 'LABEL.INVOICE.AMOUNT' | translate }}</th>
+              <th>{{ 'LABEL.COMMON.UPDATED_DATE' | translate }}</th>
+              <th>{{ 'LABEL.COMMON.STATUS' | translate }} </th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="model in ctrl.datasource.data">
+              <td class="text-center">
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" ng-click="ctrl.onCheckItem(model.invoiceId)" ng-model="ctrl.checkBoxes[model.invoiceId]" />
+                    <span class="cr">
+                      <i class="cr-icon fa fa-check"></i>
+                    </span>
+                  </label>
+                </div>
+              </td>
+              <td>{{ model.buildingCode }}</td>
+              <td>{{ model.floorCode }}</td>
+              <td>{{ model.apartmentName }}</td>
+              <td>{{ model.month }}</td>
+              <td>{{ model.amount }}</td>
+              <td>{{ model.updateDate | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
+              <td>
+                <sm-invoice-status ng-value="model.invoiceStatus" />
+              </td>
+              <td class="text-center">
+                <button type="button" class="btn btn-primary btn-xs" ng-click="ctrl.onUpdate(model)">
+                  <i class="fa fa-edit"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- /.box-body -->
+    <div class="box-footer clearfix">
+      <div class="col-md-4">
+        <sm-records count="ctrl.datasource.totalElement" />
+      </div>
+      <div class="col-md-4">
+        <ul uib-pagination boundary-links="true" ng-show="ctrl.datasource.totalElement > 0" ng-model="ctrl.currentPage" boundary-link-numbers="true"
+          max-size="5" ng-change="ctrl.onSearch({pageIndex: ctrl.currentPage})" total-items="ctrl.datasource.totalElement"
+          items-per-page="ctrl.datasource.pageSize" class="pagination pagination-sm no-margin" previous-text="&lsaquo;" next-text="&rsaquo;"
+          first-text="&laquo;" last-text="&raquo;"></ul>
+      </div>
+      <div class="col-md-4 text-right">
+        <sm-page-size ng-model="ctrl.invoice.pageSize" />
+      </div>
+    </div>
+  </div>
+  <!-- /.box -->
+</section>
+<!-- /.content -->

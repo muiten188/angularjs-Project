@@ -1,0 +1,14 @@
+<li>
+    <input ng-show="useCheckbox" type="checkbox" class="node-checkbox" ng-model="node.check" ng-click="onCheck()" />
+    <a href="javascript:void(0)" ng-init="node.showChildren = true">
+        <i ng-class="node.fileNode ? 'fa fa-file' 
+                : ((node.children && node.children.length > 0) 
+                    ? (node.showChildren ? 'fa fa-folder-open': 'fa fa-folder') 
+                    : 'fa fa-folder-o')" ng-click="node.showChildren = !node.showChildren;"></i>
+    </a>
+    <a href="javascript:void(0)">{{node.title | translate}}</a>
+    <ul ng-show="node.showChildren">
+        <tree-node ng-repeat="child in node.children" use-checkbox="useCheckbox" parent-check="node.check" node="child" ng-class="$last ? 'last' : ''"
+        />
+    </ul>
+</li>

@@ -1,0 +1,32 @@
+<aside class="main-sidebar">
+	<!-- sidebar: style can be found in sidebar.less -->
+	<section class="sidebar">
+		<ul class="sidebar-menu" data-widget="tree">
+			<!-- <li class="header">MAIN NAVIGATION</li>
+			<li>
+				<a ui-sref="home">
+					<i class="fa fa-home" aria-hidden="true"></i>
+					<span>Home</span>
+				</a>
+			</li> -->
+			<li ng-class="menu.children.length > 0 ? 'treeview menu-open' : ''" ng-repeat="menu in ctrl.listMenu" ng-if="menu.show">
+				<a ui-sref="{{menu.state}}">
+					<i ng-class="menu.icon" aria-hidden="true"></i>
+					<span>{{menu.name | translate }}</span>
+
+					<span ng-if="menu.children.length > 0" class="pull-right-container">
+						<i class="fa fa-angle-left pull-right"></i>
+					</span>
+				</a>
+				<ul ng-if="menu.children.length > 0" class="treeview-menu" style="display: block;">
+					<li ng-repeat="child in menu.children">
+						<a ui-sref="{{child.state}}">
+							<i ng-class="child.icon" aria-hidden="true"></i>
+							<span>{{child.name | translate }}</span>
+						</a>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</section>
+</aside>

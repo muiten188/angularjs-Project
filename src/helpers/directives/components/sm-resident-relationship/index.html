@@ -1,0 +1,9 @@
+<span>
+  <select ng-show="smInput" ng-model="relationship" ng-class="smClass" ng-required="smRequired" ng-readonly="smReadonly">
+    <option value>-----{{'LABEL.RESIDENT_RELATIONSHIP.TITLE' | translate}}-----</option>
+    <option ng-repeat="option in options" value="{{option.value}}">{{option.title | translate}}</option>
+  </select>
+  <span ng-show="!smInput">
+    {{relationShipValue | translate}}
+  </span>
+</span>

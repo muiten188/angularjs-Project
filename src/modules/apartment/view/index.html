@@ -1,0 +1,133 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <h1>{{ 'MENU.APARTMENT' | translate }}
+    <!-- <small>{{ 'MENU.APARTMENT' | translate }}</small> -->
+  </h1>
+</section>
+<!-- Main content -->
+<section class="content">
+  <div class="box">
+    <div class="box-body table-responsive no-padding">
+      <div class="form-search clearfix">
+        <div class="col-sm-9 search-controls">
+          <div class="row-no-padding">
+            <div class="form-group col-sm-3">
+              <label class="sr-only">{{ 'LABEL.BUILDING.CODE' | translate }}</label>
+              <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-building" aria-hidden="true"></i></div>
+                <input type="text" class="form-control input-sm" ng-model="ctrl.apartment.buildingCode" placeholder="{{ 'LABEL.BUILDING.CODE' | translate }}">
+              </div>
+            </div>
+            <div class="form-group col-sm-3">
+              <label class="sr-only">{{'LABEL.FLOOR.CODE' |translate}}</label>
+              <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-server" aria-hidden="true"></i></div>
+                <input type="text" class="form-control input-sm" ng-model="ctrl.apartment.floorCode" placeholder="{{'LABEL.FLOOR.CODE' |translate}}">
+              </div>
+            </div>
+            <!-- <div class="form-group col-sm-3">
+              <label class="sr-only">{{'LABEL.APARTMENT.NUMBER_FLOOR' |translate}}</label>
+              <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-list-ol" aria-hidden="true"></i></div>
+                <input type="text" class="form-control input-sm" ng-model="ctrl.apartment.numberFloor" placeholder="{{'LABEL.APARTMENT.NUMBER_FLOOR' |translate}}">
+              </div>
+            </div> -->
+
+            <div class="form-group col-sm-3">
+              <label class="sr-only">{{'LABEL.APARTMENT.NAME' |translate}}</label>
+              <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-info" aria-hidden="true"></i></div>
+                <input type="text" class="form-control input-sm" ng-model="ctrl.apartment.name" placeholder="{{'LABEL.APARTMENT.NAME' |translate}}">
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-sm btn-search-small" ng-click="ctrl.onSearch({pageIndex: 1})">
+              <i class="fa fa-search"></i>
+            </button>
+          </div>
+        </div>
+        <div class="col-sm-3 search-buttons">
+          <button type="submit" class="btn btn-primary btn-sm btn-search-large" ng-click="ctrl.onSearch({pageIndex: 1})">
+            <i class="fa fa-search"></i> Tìm kiếm
+          </button>
+          <button type="button" class="btn btn-danger btn-sm" ng-click="ctrl.onDeleteMulti()">
+            <i class="fa fa-trash"></i> {{ 'BUTTON.DELETE' | translate }}</button>
+          <button type="submit" class="btn btn-primary btn-sm" ng-click="ctrl.onCreate()">
+            <i class="fa fa-plus"></i> {{ 'BUTTON.CREATE' | translate }}</button>
+        </div>
+      </div>
+
+      <table class="table table-bordered table-hover" st-table st-click="ctrl.onSearch(paging)">
+        <thead>
+          <tr>
+            <th class="text-center" style="width: 30px">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" ng-click="ctrl.onCheckAll()" ng-model="ctrl.isCheckAll" />
+                  <span class="cr">
+                    <i class="cr-icon fa fa-check"></i>
+                  </span>
+                </label>
+              </div>
+            </th>
+            <!-- <th >{{ 'LABEL.BUILDING.CODE' | translate }}</th>
+            <th >{{ 'LABEL.FLOOR.CODE' | translate }}</th> -->
+            <th class="sort" sort-by="name">{{ 'LABEL.APARTMENT.NAME' | translate }}</th>
+            <th>{{ 'LABEL.APARTMENT.PLAN' | translate }}</th>
+            <th>{{ 'LABEL.APARTMENT.AREA' | translate }} </th>
+            <!-- <th>{{ 'LABEL.APARTMENT.SERVICEFEE' | translate }}</th>
+            <th>{{ 'LABEL.APARTMENT.NOTE' | translate }} </th> -->
+            <!-- <th>{{ 'LABEL.APARTMENT.NUMBER_BEDROOM' | translate }}</th> -->
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="model in ctrl.datasource.data">
+            <td class="text-center">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" ng-click="ctrl.onCheckItem(model.apartmentId)" ng-model="ctrl.checkBoxes[model.apartmentId]" />
+                  <span class="cr">
+                    <i class="cr-icon fa fa-check"></i>
+                  </span>
+                </label>
+              </div>
+            </td>
+            <!-- <td>{{ model.buildingCode }}</td>
+            <td>{{ model.floorCode }}</td> -->
+            <td>{{ model.name }}</td>
+            <td>{{ 'LABEL.FLOOR.FLOOR_DIRECTION.'+model.direction | translate }}</td>
+            <td>{{ model.area }}</td>
+            <!-- <td>{{ model.area }}</td>
+            <td>{{ model.area }}</td> -->
+            <!-- <td>{{ model.numberBedroom }}</td> -->
+            <td class="text-center">
+              <button type="button" class="btn btn-primary btn-xs" ng-click="ctrl.onUpdate(model)">
+                <i class="fa fa-edit"></i>
+              </button>
+              <button type="button" class="btn btn-danger btn-xs" ng-click="ctrl.onDelete(model)">
+                <i class="fa fa-trash"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- /.box-body -->
+    <div class="box-footer clearfix">
+      <div class="col-md-4">
+        <sm-records count="ctrl.datasource.totalElement" />
+      </div>
+      <div class="col-md-4">
+        <ul uib-pagination boundary-links="true" ng-show="ctrl.datasource.totalElement > 0" ng-model="ctrl.currentPage" boundary-link-numbers="true"
+          max-size="5" ng-change="ctrl.onSearch({pageIndex: ctrl.currentPage})" total-items="ctrl.datasource.totalElement"
+          items-per-page="ctrl.datasource.pageSize" class="pagination pagination-sm no-margin" previous-text="&lsaquo;" next-text="&rsaquo;"
+          first-text="&laquo;" last-text="&raquo;"></ul>
+      </div>
+      <div class="col-md-4 text-right">
+        <sm-page-size ng-model="ctrl.apartment.pageSize" />
+      </div>
+    </div>
+  </div>
+  <!-- /.box -->
+</section>
+<!-- /.content -->
